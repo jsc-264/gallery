@@ -1,4 +1,4 @@
-const DIMENSION = 15
+const DIMENSION = 10
 let tileWidth
 let tiles = []
 
@@ -8,7 +8,7 @@ let noiseX, noiseY, noiseZ
 const noiseInc = 0.25
 
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(windowWidth / 2, windowWidth / 2);
   tileWidth = width / DIMENSION
 
   startColour = color(36, 4, 125)
@@ -42,5 +42,5 @@ function draw() {
     }
     noiseY += noiseInc
   }
-  noiseZ += noiseInc/10
+  noiseZ += noiseInc / 10
 }
