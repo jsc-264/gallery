@@ -5,7 +5,7 @@ let tiles = []
 let startColour, endColour
 
 let noiseX, noiseY, noiseZ
-const noiseInc = 0.3
+const noiseInc = 0.25
 
 function setup() {
   createCanvas(400, 400);
