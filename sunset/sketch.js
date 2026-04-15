@@ -12,7 +12,7 @@ function setup() {
   tileWidth = width / DIMENSION
 
   startColour = color(36, 4, 125)
-  endColour = color(217, 20, 49)
+  endColour = color(214, 32, 78)
 
   for (let j = 0; j < DIMENSION; j++) {
     for (let i = 0; i < DIMENSION; i++) {
@@ -26,7 +26,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(242, 230, 211);
   noiseX = 0
 
   for (let j = 0; j < DIMENSION; j++) {
