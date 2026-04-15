@@ -4,6 +4,9 @@ let tiles = []
 
 let startColour, endColour
 
+let noiseX, noiseY, noiseZ
+const noiseInc = 0.3
+
 function setup() {
   createCanvas(400, 400);
   tileWidth = width / DIMENSION
@@ -18,12 +21,26 @@ function setup() {
       tiles.push(new Tile(centerX, centerY, j, tileWidth))
     }
   }
+
+  noiseZ = 0
 }
 
 function draw() {
-  background(255);
+  background(0);
+  noiseX = 0
 
-  tiles.forEach(tile => {
-    tile.render()
-  })
+  for (let j = 0; j < DIMENSION; j++) {
+    noiseY = 0
+    for (let i = 0; i < DIMENSION; i++) {
+      const n = noise(noiseX, noiseY, noiseZ)
+      const index = j * DIMENSION + i
+
+      tiles[index].render()
+      tiles[index].setStrokeWeight(n)
+
+      noiseX += noiseInc
+    }
+    noiseY += noiseInc
+  }
+  noiseZ += noiseInc/10
 }

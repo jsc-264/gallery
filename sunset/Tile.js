@@ -15,13 +15,15 @@ class Tile {
                 )
             )
         }
+
+        this.strokeWeight = 1
     }
 
     render() {
         push()
         translate(this.pos.x, this.pos.y)
 
-        
+        strokeWeight(this.strokeWeight)
 
         const strokeColT = map(this.j, 0, DIMENSION, 0, 1)
         const strokeCol = lerpColor(startColour, endColour, strokeColT)
@@ -33,5 +35,9 @@ class Tile {
             circle(circlePosition.x, circlePosition.y, this.w)
         }
         pop()
+    }
+
+    setStrokeWeight(n) {
+        this.strokeWeight = map(n, 0, 1, 1, 3)
     }
 }
