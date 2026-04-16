@@ -4,7 +4,7 @@ class Tile {
         this.w = w
         this.j = j
 
-        const circlesRange = map(j, 0, DIMENSION, tileWidth / 3, tileWidth / 10)
+        const circlesRange = map(j, 0, DIMENSION, tileWidth, tileWidth / 10)
         const numCircles = map(j, 0, DIMENSION, 10, 1)
         this.extraCirclesCoords = []
         for (let i = 0; i < numCircles; i++) {

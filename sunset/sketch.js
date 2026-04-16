@@ -8,7 +8,7 @@ let noiseX, noiseY, noiseZ
 const noiseInc = 0.25
 
 function setup() {
-  createCanvas(windowWidth / 2, windowWidth / 2);
+  createCanvas(windowWidth / 3, windowWidth / 3);
   tileWidth = width / DIMENSION
 
   startColour = color(36, 4, 125)
