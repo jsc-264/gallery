@@ -38,6 +38,6 @@ class Tile {
     }
 
     setStrokeWeight(n) {
-        this.strokeWeight = map(n, 0, 1, 1, 3)
+        this.strokeWeight = map(n, 0, 1, 1, 6)
     }
 }
