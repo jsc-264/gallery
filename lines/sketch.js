@@ -42,7 +42,8 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(50);
+  stroke(238, 206, 245)
 
   for (let j = 0; j < DIMENSION; j++) {
     for (let i = 0; i < DIMENSION; i++) {
