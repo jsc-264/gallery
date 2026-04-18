@@ -1,8 +1,9 @@
-const DIMENSION = 30
+const DIMENSION = 10
 let nums = []
+let mult
 
-function formula(num){
-  let val = (num + 1) % DIMENSION**2
+function multiply(num, mult){
+  let val = (num * mult) % DIMENSION**2
   return val
 }
 
@@ -18,6 +19,7 @@ function setup() {
   createCanvas(400, 400);
   textAlign(CENTER, CENTER)
   const tileWidth = width/DIMENSION
+  mult = floor(random(2, 200))
 
   let num = 0
   for (let j = 0; j < DIMENSION; j++) {
@@ -39,9 +41,16 @@ function draw() {
     for (let i = 0; i < DIMENSION; i++) {
       const index = j * DIMENSION + i
       const num = nums[index]
-      const result = formula(num.value)
+      const result = multiply(num.value, mult)
       const target = findObject(result)
+
       line(num.x, num.y, target.x, target.y)
     }
+  }
+}
+
+function keyPressed() {
+  if (key == " "){
+    mult = floor(random(2, 100))
   }
 }
