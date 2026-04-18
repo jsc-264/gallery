@@ -1,6 +1,10 @@
 const DIMENSION = 10
 let nums = []
 let mult
+let multP
+let descP
+
+let multString = ""
 
 function multiply(num, mult){
   let val = (num * mult) % DIMENSION**2
@@ -20,6 +24,9 @@ function setup() {
   textAlign(CENTER, CENTER)
   const tileWidth = width/DIMENSION
   mult = floor(random(2, 200))
+
+  descP = createP("type a number to input it into the formula below, or hit space for a new random number: ")
+  multP = createP()
 
   let num = 0
   for (let j = 0; j < DIMENSION; j++) {
@@ -47,10 +54,20 @@ function draw() {
       line(num.x, num.y, target.x, target.y)
     }
   }
+
+  multP.html(`result = current * ${mult}`)
 }
 
 function keyPressed() {
   if (key == " "){
     mult = floor(random(2, 100))
+    multString = ""
+    return
   }
+
+  if (!isNaN(parseInt(key))) {
+    multString += key
+  }
+
+  mult = parseInt(multString)
 }
