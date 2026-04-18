@@ -4,6 +4,7 @@ class Tile {
         this.w = w
         this.j = j
 
+        // created randomness of circles, more down on screen means less randomness
         const circlesRange = map(j, 0, DIMENSION, tileWidth, tileWidth / 10)
         const numCircles = map(j, 0, DIMENSION, 10, 1)
         this.extraCirclesCoords = []
@@ -25,6 +26,7 @@ class Tile {
 
         strokeWeight(this.strokeWeight)
 
+        // assign colour to circles based of y position in tile grid
         const strokeColT = map(this.j, 0, DIMENSION, 0, 1)
         const strokeCol = lerpColor(sunsetStartColour, sunsetEndColour, strokeColT)
         stroke(strokeCol)

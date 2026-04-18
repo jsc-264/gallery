@@ -12,12 +12,14 @@ function setup() {
   createCanvas(windowWidth / 2.5, windowWidth / 2.5);
   tileWidth = width / DIMENSION
 
+  // defining colour values
   sunsetStartColour = color(36, 4, 125)
   sunsetEndColour = color(214, 32, 78)
 
   skyDayColour = color(135, 206, 235)
   skyNightColour = color(88, 72, 128)
 
+  // seeding tiles array with objects
   for (let j = 0; j < DIMENSION; j++) {
     for (let i = 0; i < DIMENSION; i++) {
       const centerX = tileWidth * i + tileWidth / 2
@@ -48,6 +50,7 @@ function draw() {
   for (let j = 0; j < DIMENSION; j++) {
     noiseY = 0
     for (let i = 0; i < DIMENSION; i++) {
+      // get noise value and using it on each tile
       const n = noise(noiseX, noiseY, noiseZ)
       const index = j * DIMENSION + i
 
