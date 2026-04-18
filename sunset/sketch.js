@@ -9,7 +9,7 @@ let noiseX, noiseY, noiseZ
 const noiseInc = 0.25
 
 function setup() {
-  createCanvas(windowWidth / 3, windowWidth / 3);
+  createCanvas(windowWidth / 2.5, windowWidth / 2.5);
   tileWidth = width / DIMENSION
 
   sunsetStartColour = color(36, 4, 125)
