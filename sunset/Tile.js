@@ -26,7 +26,7 @@ class Tile {
         strokeWeight(this.strokeWeight)
 
         const strokeColT = map(this.j, 0, DIMENSION, 0, 1)
-        const strokeCol = lerpColor(startColour, endColour, strokeColT)
+        const strokeCol = lerpColor(sunsetStartColour, sunsetEndColour, strokeColT)
         stroke(strokeCol)
         noFill()
 

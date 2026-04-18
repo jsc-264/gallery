@@ -2,7 +2,8 @@ const DIMENSION = 10
 let tileWidth
 let tiles = []
 
-let startColour, endColour
+let sunsetStartColour, sunsetEndColour
+let skyDayColour, skyNightColour
 
 let noiseX, noiseY, noiseZ
 const noiseInc = 0.25
@@ -11,8 +12,11 @@ function setup() {
   createCanvas(windowWidth / 3, windowWidth / 3);
   tileWidth = width / DIMENSION
 
-  startColour = color(36, 4, 125)
-  endColour = color(214, 32, 78)
+  sunsetStartColour = color(36, 4, 125)
+  sunsetEndColour = color(214, 32, 78)
+
+  skyDayColour = color(135, 206, 235)
+  skyNightColour = color(88, 72, 128)
 
   for (let j = 0; j < DIMENSION; j++) {
     for (let i = 0; i < DIMENSION; i++) {
@@ -26,7 +30,19 @@ function setup() {
 }
 
 function draw() {
-  background(242, 230, 211);
+  const secondsOfDay = (hour() * 3600) + (minute() * 60) + second()
+
+  let bgColour
+  if (secondsOfDay < 43200) {
+    const t = map(secondsOfDay, 0, 43200, 0, 1)
+    bgColour = lerpColor(skyNightColour, skyDayColour, t)
+  } else {
+    const t = map(secondsOfDay, 43200, 86400, 0, 1)
+    bgColour = lerpColor(skyDayColour, skyNightColour, t)
+  }
+
+
+  background(bgColour);
   noiseX = 0
 
   for (let j = 0; j < DIMENSION; j++) {
