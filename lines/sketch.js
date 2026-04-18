@@ -4,6 +4,9 @@ let mult
 let multP
 let descP
 
+let rangeMin = 2
+let rangeMax = 1000
+
 let multString = ""
 
 function multiply(num, mult){
@@ -23,7 +26,7 @@ function setup() {
   createCanvas(400, 400);
   textAlign(CENTER, CENTER)
   const tileWidth = width/DIMENSION
-  mult = floor(random(2, 200))
+  mult = floor(random(rangeMin, rangeMax))
 
   descP = createP("type a number to input it into the formula below, or hit space for a new random number: ")
   multP = createP()
@@ -61,7 +64,7 @@ function draw() {
 
 function keyPressed() {
   if (key == " "){
-    mult = floor(random(2, 100))
+    mult = floor(random(rangeMin, rangeMax))
     multString = ""
     return
   }
