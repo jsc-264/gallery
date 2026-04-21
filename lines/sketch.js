@@ -23,7 +23,7 @@ function findObject(targetValue){
 }
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(500, 500);
   textAlign(CENTER, CENTER)
   const tileWidth = width/DIMENSION
   mult = floor(random(rangeMin, rangeMax))
