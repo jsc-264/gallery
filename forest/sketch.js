@@ -15,7 +15,7 @@ function setup() {
 }
 
 function draw() {
-  for (let a = 0; a < DIMENSION; a++) {
+  for (let _ = 0; _ < DIMENSION/10; _++) {
     for (let j = 0; j < DIMENSION; j++) {
       for (let i = 0; i < DIMENSION; i++) {
         const n = noise(i / 10, j / 10, nz)
