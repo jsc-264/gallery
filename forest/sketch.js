@@ -10,15 +10,28 @@ function setup() {
   for (let i = 0; i < DIMENSION; i++){
     colours.push(new Array(DIMENSION))
   }
-  print(colours)
 }
 
 function draw() {
   for (let j = 0; j < DIMENSION; j++) {
     for (let i = 0; i < DIMENSION; i++) {
       const n = noise(i / 10, j / 10)
-      colours[x][y] = n
+      colours[i][j] = n
     }
   }
 
+  const x = random(width)
+  const y = random(height)
+
+  const i = floor(map(x, 0, width, 0, DIMENSION))
+  const j = floor(map(y, 0, height, 0, DIMENSION))
+
+  const n = colours[i][j]
+  const col = color(
+    map(n, 0, 1, 35, 50),
+    map(n, 0, 1, 0, 100),
+    map(n, 0, 1, 10, 50),
+  )
+  fill(col)
+  rect(x, y, width/DIMENSION, height/DIMENSION)
 }
