@@ -1,9 +1,9 @@
-const DIMENSION = 10
+const DIMENSION = 40
 const colours = []
 let nz = 0
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
   colorMode(HSL)
 
   noStroke()
@@ -36,7 +36,7 @@ function draw() {
       map(n, 0, 1, 0, 100),
     )
     fill(col)
-    ellipse(x, y, width / DIMENSION, height / DIMENSION)
+    ellipse(x, y, width / DIMENSION)
 
     nz += 0.0005
   }
