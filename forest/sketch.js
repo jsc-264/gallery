@@ -1,17 +1,24 @@
-const DIMENSION = 20
+const DIMENSION = 30
+const colours = []
 
 function setup() {
   createCanvas(400, 400);
   colorMode(HSL)
   noStroke()
   background(0, 0, 90);
+
+  for (let i = 0; i < DIMENSION; i++){
+    colours.push(new Array(DIMENSION))
+  }
+  print(colours)
 }
 
 function draw() {
-  const x = floor(random(DIMENSION))
-  const y = floor(random(DIMENSION))
+  for (let j = 0; j < DIMENSION; j++) {
+    for (let i = 0; i < DIMENSION; i++) {
+      const n = noise(i / 10, j / 10)
+      colours[x][y] = n
+    }
+  }
 
-  const n = noise(x/10, y/10)
-  fill(n*100)
-  rect(width/DIMENSION*x, height/DIMENSION*y, width/DIMENSION, height/DIMENSION)
 }
