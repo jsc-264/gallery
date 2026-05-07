@@ -3,31 +3,27 @@ const msg = "I Love You"
 const url = "./assets/DarumadropOne-Regular.ttf"
 let font
 
-let myPoints = []
+let particles = []
 
 async function setup() {
-    createCanvas(windowWidth*0.9, windowHeight*0.9);
+    createCanvas(windowWidth * 0.9, windowHeight * 0.9);
     font = await loadFont(url)
     textFont(font)
     textSize(map(width, 200, 1000, 20, 200))
     textAlign(CENTER, CENTER)
 
-    noFill()
-    stroke(0)
-    strokeWeight(2)
-
     const options = {
-        sampleFactor: 1,
+        sampleFactor: 0.1,
         simplifyThreshold: 0
     }
-    const messagePoints = font.textToContours(msg, 0, 0, options)
+    const messagePoints = font.textToContours(msg, width / 2, height / 2, options)
 
     for (let letterPoints of messagePoints) {
         for (let p of letterPoints) {
-            myPoints.push({
+            particles.push(new Particle(random(width), random(height), {
                 x: p.x,
                 y: p.y
-            })
+            }))
         }
     }
 
@@ -36,10 +32,7 @@ async function setup() {
 function draw() {
     background(220);
 
-    translate(width/2, height/2)
-    beginShape()
-    for (let p of myPoints){
-        vertex(p.x, p.y)
+    for (let part of particles) {
+        part.render()
     }
-    endShape()
 }
