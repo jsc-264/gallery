@@ -33,6 +33,7 @@ function draw() {
     background(220);
 
     for (let part of particles) {
+        part.update()
         part.render()
     }
 }
