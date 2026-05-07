@@ -1,4 +1,4 @@
-const msg = "I Love You"
+const msg = "HI"
 
 const url = "./assets/DarumadropOne-Regular.ttf"
 let font
