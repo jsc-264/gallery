@@ -4,12 +4,13 @@ const url = "./assets/DarumadropOne-Regular.ttf"
 let font
 
 let particles = []
+let points = []
 
 async function setup() {
     createCanvas(windowWidth * 0.9, windowHeight * 0.9);
     font = await loadFont(url)
     textFont(font)
-    textSize(map(width, 200, 1000, 20, 200))
+    textSize(map(width, 200, 1000, 100, 200))
     textAlign(CENTER, CENTER)
 
     const options = {
@@ -20,6 +21,11 @@ async function setup() {
 
     for (let letterPoints of messagePoints) {
         for (let p of letterPoints) {
+            points.push({
+                x: p.x,
+                y: p.y
+            })
+
             particles.push(new Particle(random(width), random(height), {
                 x: p.x,
                 y: p.y
