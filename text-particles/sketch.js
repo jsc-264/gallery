@@ -1,4 +1,4 @@
-const msg = "HI"
+const msg = "0"
 
 const url = "./assets/DarumadropOne-Regular.ttf"
 let font
@@ -14,7 +14,7 @@ async function setup() {
     textAlign(CENTER, CENTER)
 
     const options = {
-        sampleFactor: 0.1,
+        sampleFactor: 0.5,
         simplifyThreshold: 0
     }
     const messagePoints = font.textToContours(msg, width / 2, height / 2, options)
@@ -30,6 +30,7 @@ async function setup() {
                 x: p.x,
                 y: p.y
             }))
+
         }
     }
 
