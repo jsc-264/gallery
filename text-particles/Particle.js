@@ -27,28 +27,34 @@ class Particle {
         if (this.pos.y < -this.diam) this.pos.y = height + this.diam
         if (this.pos.y > height + this.diam) this.pos.y = -this.diam
 
-        const closest = this.closestTo(points)
+        const closestI = this.closestTo(points)
+        const closest = points[closestI]
         const d = dist(this.pos.x, this.pos.y, closest.x, closest.y)
 
-        if (d < 10){
+        if (d < 500 && points[closestI].open){
             this.vel = 0
             this.pos.x = closest.x
             this.pos.y = closest.y
+
+            points[closestI].open = false
+
         }
     }
 
-    closestTo(points) {
-        let closest = points[0];
+    closestTo() {
+        let closestI = 0;
 
-        for (let p of points) {
+        for (let i = 0; i < points.length; i++) {
+            const closest = points[closestI]
+            const p = points[i]
             const currentClosestD = dist(this.pos.x, this.pos.y, closest.x, closest.y)
             const pointD = dist(this.pos.x, this.pos.y, p.x, p.y)
 
             if (pointD <= currentClosestD) {
-                closest = p
+                closestI = i
             }
         }
 
-        return closest
+        return closestI
     }
 }

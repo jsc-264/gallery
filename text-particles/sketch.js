@@ -1,4 +1,4 @@
-const msg = "0"
+const msg = "I Love You"
 
 const url = "./assets/DarumadropOne-Regular.ttf"
 let font
@@ -14,7 +14,7 @@ async function setup() {
     textAlign(CENTER, CENTER)
 
     const options = {
-        sampleFactor: 0.5,
+        sampleFactor: map(msg.length, 1, 10, 0.6, 0.2),
         simplifyThreshold: 0
     }
     const messagePoints = font.textToContours(msg, width / 2, height / 2, options)
@@ -23,17 +23,14 @@ async function setup() {
         for (let p of letterPoints) {
             points.push({
                 x: p.x,
-                y: p.y
+                y: p.y,
+                open: true
             })
 
-            particles.push(new Particle(random(width), random(height), {
-                x: p.x,
-                y: p.y
-            }))
+            particles.push(new Particle(random(width), random(height)))
 
         }
     }
-
 }
 
 function draw() {
