@@ -1,4 +1,5 @@
 let vis
+let running = false
 
 function setup() {
   getAudioContext().suspend();
@@ -6,17 +7,24 @@ function setup() {
 
   vis = new AudioVisualiser()
   vis.startListening()
+
+  fill(87, 156, 93)
+  stroke(87, 156, 93)
 }
 
 function draw() {
-  background(220);
-  vis.update()
+  background(230, 148, 235);
+  if (running) {
+    vis.update()
+    vis.render()
+  }
 }
 
-function mousePressed(){
+function mousePressed() {
   userStartAudio()
+  running = true
 }
 
-function windowResized(){
+function windowResized() {
   resizeCanvas(windowWidth, windowHeight)
 }

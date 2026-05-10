@@ -1,7 +1,7 @@
 class AudioVisualiser{
     constructor(options = {
-        smooth: 0.8,
-        len: 6
+        smooth: 0.85,
+        len: 10
     }){
         this.mic = new p5.AudioIn()
         this.fft = new p5.FFT(options.smooth, pow(2, options.len))
@@ -23,12 +23,23 @@ class AudioVisualiser{
     }
 
     update(){
-        this.spectrum = this.fft.analyse()
+        this.spectrum = this.fft.analyze(this.mic)
         this.bins = this.spectrum.length
-        this.vol = this.getAvgVol()
+    }
 
-        this.lows = this.spectrum.slice(0, this.bins/3)
-        this.mids = this.spectrum.slice(this.bins/3, 2*this.bins/3)
-        this.highs = this.spectrum.slice(2*this.bins/3)
+    render() {
+        const w = width / this.bins
+        for (let i = 0; i < this.bins; i++) {
+            const amp = this.spectrum[i]
+            const x = w * i
+
+            const h = map(amp, 0, 255, 0, height)
+
+            rect(x, height - h, w, h)
+        }
     }
 }
+
+// ideas for later
+// add something more interactive to it eg a character
+// who falls and bounces on rects
