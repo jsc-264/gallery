@@ -12,16 +12,6 @@ class AudioVisualiser{
         this.fft.setInput(this.mic)
     }
 
-    getAvgVol(){
-        let avg = 0
-        for (let i = 0; i < this.bins; i++){
-            avg += this.spectrum[i]
-        }
-
-        avg /= this.bins
-        return avg
-    }
-
     update(){
         this.spectrum = this.fft.analyze(this.mic)
         this.bins = this.spectrum.length
