@@ -7,7 +7,7 @@ let particles = []
 let points = []
 
 async function setup() {
-    createCanvas(windowWidth * 0.9, windowHeight * 0.9);
+    createCanvas(windowWidth * 0.99, windowHeight * 0.99);
     font = await loadFont(url)
     textFont(font)
     textSize(map(width, 200, 1000, 100, 200))
