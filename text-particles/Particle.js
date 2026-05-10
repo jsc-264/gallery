@@ -9,7 +9,7 @@ function averageVectors(vectors) {
 
 class Particle {
     constructor(x, y) {
-        this.diam = 5
+        this.diam = random(5, 10)
         this.pos = createVector(x, y)
         this.vel = createVector(0, 10)
         this.vel.rotate(random(TWO_PI))
@@ -31,7 +31,7 @@ class Particle {
         const closest = points[closestI]
         const d = dist(this.pos.x, this.pos.y, closest.x, closest.y)
 
-        if (d < 500 && points[closestI].open){
+        if (d < this.diam && points[closestI].open){
             this.vel = 0
             this.pos.x = closest.x
             this.pos.y = closest.y

@@ -7,15 +7,15 @@ let particles = []
 let points = []
 
 async function setup() {
-    createCanvas(windowWidth * 0.99, windowHeight * 0.99);
+    createCanvas(windowWidth * 0.9, windowHeight * 0.9);
     font = await loadFont(url)
     textFont(font)
-    textSize(map(width, 200, 1000, 100, 200))
+    textSize(map(width, 200, 1000, 50, 200))
     textAlign(CENTER, CENTER)
 
     const options = {
-        sampleFactor: map(msg.length, 1, 10, 0.6, 0.2),
-        simplifyThreshold: 0
+        sampleFactor: 0.15,
+        simplifyThreshold: 0.1
     }
     const messagePoints = font.textToContours(msg, width / 2, height / 2, options)
 
@@ -31,10 +31,13 @@ async function setup() {
 
         }
     }
+
+    noStroke()
+    fill(51, 87, 41)
 }
 
 function draw() {
-    background(220);
+    background(140, 176, 130);
 
     for (let part of particles) {
         part.update()
