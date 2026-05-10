@@ -1,4 +1,4 @@
-const msg = "I Love You"
+let msg;
 
 const url = "./assets/DarumadropOne-Regular.ttf"
 let font
@@ -12,6 +12,13 @@ async function setup() {
     textFont(font)
     textSize(map(width, 200, 1000, 50, 200))
     textAlign(CENTER, CENTER)
+
+    msg = random([
+        "I love You",
+        "My Prince",
+        "My Darling",
+        "Always and Forever"
+    ])
 
     const options = {
         sampleFactor: 0.15,
