@@ -2,6 +2,12 @@ class AudioVisualiser {
     constructor() {
         this.mic = new p5.AudioIn()
         this.fft = new p5.FFT()
+
+        this.colours = {
+            circles: color(5, 220, 100, 90),
+            left: color(100, 5, 220, 90),
+            right: color(220, 100, 5, 90)
+        }
     }
 
     startListening() {
@@ -41,7 +47,7 @@ class AudioVisualiser {
         push()
         translate(width / 2, height / 2)
         noFill()
-        stroke(5, 220, 100, 90)
+        stroke(this.colours.circles)
         for (let i = 0; i < this.bins; i += 30) {
             const freq = this.spectrum[i]
             const s = map(freq, 0, 255, 0, 50)
@@ -60,7 +66,7 @@ class AudioVisualiser {
 
         beginShape()
         noFill()
-        stroke(220, 100, 5, 90)
+        stroke(this.colours.left)
         strokeWeight(3)
         for (let i = 0; i < range; i++) {
             const freq = this.spectrum[i]
@@ -72,9 +78,29 @@ class AudioVisualiser {
         pop()
     }
 
+    renderRight() {
+        push()
+
+        const range = this.wave.length / 2
+
+        beginShape()
+        noFill()
+        stroke(this.colours.right)
+        strokeWeight(3)
+        for (let i = 0; i < range; i++) {
+            const freq = this.wave[i]
+            const x = map(freq, -1, 1, width, width-200)
+            const y = height / range * i
+            vertex(x, y)
+        }
+        endShape()
+        pop()
+    }
+
     render() {
         this.renderCircles()
         this.renderLeft()
+        this.renderRight()
     }
 }
 
