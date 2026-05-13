@@ -1,20 +1,17 @@
-class AudioVisualiser{
-    constructor(options = {
-        smooth: 0.85,
-        len: 10
-    }){
+class AudioVisualiser {
+    constructor(smooth, bins) {
         this.mic = new p5.AudioIn()
-        this.fft = new p5.FFT(options.smooth, pow(2, options.len))
+        this.fft = new p5.FFT(smooth, bins)
+        this.bins = bins
     }
 
-    startListening(){
+    startListening() {
         this.mic.start()
         this.fft.setInput(this.mic)
     }
 
-    update(){
-        this.spectrum = this.fft.analyze(this.mic)
-        this.bins = this.spectrum.length
+    update() {
+        this.spectrum = this.fft.analyze()
     }
 
     render() {
