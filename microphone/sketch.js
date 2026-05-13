@@ -1,5 +1,6 @@
 let vis
 let running = false
+let avgDim
 
 function setup() {
   getAudioContext().suspend();
@@ -7,13 +8,11 @@ function setup() {
 
   vis = new AudioVisualiser()
   vis.startListening()
-
-  fill(87, 156, 93)
-  stroke(87, 156, 93)
 }
 
 function draw() {
-  background(230, 148, 235);
+  background(50);
+  avgDim = (width + height) / 2
   if (running) {
     vis.update()
     vis.render()

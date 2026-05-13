@@ -1,18 +1,29 @@
-class AudioVisualiser{
-    constructor(){
+class AudioVisualiser {
+    constructor() {
         this.mic = new p5.AudioIn()
         this.fft = new p5.FFT()
     }
 
-    startListening(){
+    startListening() {
         this.mic.start()
         this.fft.setInput(this.mic)
     }
 
-    getLoudestFrequency(){
+    getAverageVolume() {
+        let avg = 0
+        for (let f of this.spectrum) {
+            avg += f
+        }
+
+        avg /= this.spectrum.length
+
+        return avg
+    }
+
+    getLoudestFrequency() {
         let loudest = 0
-        for (let f of this.spectrum){
-            if (f > loudest){
+        for (let f of this.spectrum) {
+            if (f > loudest) {
                 loudest = f
             }
         }
@@ -20,22 +31,29 @@ class AudioVisualiser{
         return loudest
     }
 
-    update(){
+    update() {
         this.spectrum = this.fft.analyze()
-        this.spectrum = this.spectrum.slice(5, floor(this.spectrum.length/8))
         this.bins = this.spectrum.length
     }
 
-    render() {
-        const w = width / this.bins
-        for (let i = 0; i < this.bins; i++) {
+    renderCircles(){
+        push()
+        translate(width / 2, height / 2)
+        noFill()
+        stroke(5, 220, 100, 90)
+        for (let i = 0; i < this.spectrum.length; i += 30) {
             const amp = this.spectrum[i]
-            const x = w * i
+            const s = map(amp, 0, 255, 0, 50)
+            const r = map(amp, 0, 255, 0, avgDim / 1.5)
 
-            const h = map(amp, 0, 255, 0, height)
-
-            rect(x, height - h, w, h)
+            strokeWeight(s)
+            circle(0, 0, r * 2)
         }
+        pop()
+    }
+
+    render() {
+        this.renderCircles()
     }
 }
 
