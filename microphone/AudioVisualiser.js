@@ -5,8 +5,8 @@ class AudioVisualiser {
 
         this.colours = {
             circles: color(5, 220, 100, 90),
-            left: color(100, 5, 220, 90),
-            right: color(220, 100, 5, 90)
+            left: color(52, 168, 235, 90),
+            right: color(235, 35, 168, 90)
         }
     }
 
