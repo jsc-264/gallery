@@ -32,19 +32,20 @@ class AudioVisualiser {
     }
 
     update() {
+        this.wave = this.fft.waveform()
         this.spectrum = this.fft.analyze()
         this.bins = this.spectrum.length
     }
 
-    renderCircles(){
+    renderCircles() {
         push()
         translate(width / 2, height / 2)
         noFill()
         stroke(5, 220, 100, 90)
-        for (let i = 0; i < this.spectrum.length; i += 30) {
-            const amp = this.spectrum[i]
-            const s = map(amp, 0, 255, 0, 50)
-            const r = map(amp, 0, 255, 0, avgDim / 1.5)
+        for (let i = 0; i < this.bins; i += 30) {
+            const freq = this.spectrum[i]
+            const s = map(freq, 0, 255, 0, 50)
+            const r = map(freq, 0, 255, 0, avgDim / 1.5)
 
             strokeWeight(s)
             circle(0, 0, r * 2)
@@ -52,8 +53,28 @@ class AudioVisualiser {
         pop()
     }
 
+    renderLeft() {
+        push()
+
+        const range = this.bins/2
+
+        beginShape()
+        noFill()
+        stroke(220, 100, 5, 90)
+        strokeWeight(3)
+        for (let i = 0; i < range; i++) {
+            const freq = this.spectrum[i]
+            const x = map(freq, 0, 255, 0, 300)
+            const y = height / range * i
+            vertex(x, y)
+        }
+        endShape()
+        pop()
+    }
+
     render() {
         this.renderCircles()
+        this.renderLeft()
     }
 }
 
