@@ -1,17 +1,29 @@
-class AudioVisualiser {
-    constructor(smooth, bins) {
+class AudioVisualiser{
+    constructor(){
         this.mic = new p5.AudioIn()
-        this.fft = new p5.FFT(smooth, bins)
-        this.bins = bins
+        this.fft = new p5.FFT()
     }
 
-    startListening() {
+    startListening(){
         this.mic.start()
         this.fft.setInput(this.mic)
     }
 
-    update() {
+    getLoudestFrequency(){
+        let loudest = 0
+        for (let f of this.spectrum){
+            if (f > loudest){
+                loudest = f
+            }
+        }
+
+        return loudest
+    }
+
+    update(){
         this.spectrum = this.fft.analyze()
+        this.spectrum = this.spectrum.slice(5, floor(this.spectrum.length/8))
+        this.bins = this.spectrum.length
     }
 
     render() {
