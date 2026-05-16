@@ -1,6 +1,3 @@
-# Gallery
-
-
 - [sunset](./sunset/index.html)
 - [lines](./lines/index.html)
 - [forest](./forest/index.html)
