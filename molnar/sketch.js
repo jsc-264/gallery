@@ -5,8 +5,9 @@ let colours
 
 function shape(x, y, s) {
     const numShapes = random(1, 7)
-    const wiggle = 10
+    const wiggle = 15
     stroke(random(colours))
+    strokeWeight(map(numShapes, 1, 7, 3, 0.5))
     noFill()
     for (let i = 0; i < numShapes; i++) {
         beginShape()
