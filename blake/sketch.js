@@ -8,9 +8,10 @@ function randCol() {
 }
 
 function getColorPair() {
+    const chance = 0.6
     const r = random()
-    const col1 = r < 0.7 ? randCol() : color(0)
-    const col2 = r < 0.7 ? randCol() : color(255)
+    const col1 = r < chance ? randCol() : color(0)
+    const col2 = r < chance ? randCol() : color(255)
 
     return [col1, col2]
 }
@@ -39,20 +40,21 @@ function concentricCircles(x, y, w) {
     pop()
 }
 
-function checker(x, y, w, checkerDim = 4) {
+function checker(x, y, w) {
+    const CHECKERDIM = random([3, 4])
     const [col1, col2] = getColorPair()
 
     push()
     translate(x, y)
-    for (let j = 0; j < checkerDim; j++) {
-        for (let i = 0; i < checkerDim; i++) {
+    for (let j = 0; j < CHECKERDIM; j++) {
+        for (let i = 0; i < CHECKERDIM; i++) {
             if ((i + j) % 2 == 0) {
                 fill(col1)
             } else {
                 fill(col2)
             }
 
-            rect(i * w / checkerDim, j * w / checkerDim, w / checkerDim)
+            rect(i * w / CHECKERDIM, j * w / CHECKERDIM, w / CHECKERDIM)
         }
     }
     pop()
@@ -134,15 +136,15 @@ function setup() {
     noStroke()
 
     palette = [
-        color(219, 41, 13),
-        color(227, 177, 27),
-        color(235, 228, 30),
-        color(14, 179, 33),
-        color(73, 208, 245),
-        color(19, 82, 209),
-        color(130, 43, 207),
-        color(201, 18, 143),
-        color(122, 90, 13)
+        color(219, 41, 13), // red
+        color(227, 177, 27), // orange
+        color(235, 228, 30), // yellow
+        color(14, 179, 33), // green
+        color(73, 208, 245), // light blue
+        color(19, 82, 209), // dark blue
+        color(130, 43, 207), // purple
+        color(201, 18, 143), // pink
+        color(122, 90, 13) // brown
     ]
 }
 
@@ -166,9 +168,16 @@ function draw() {
             pattern(x, y, tWidth)
         }
     }
+
     noLoop()
 }
 
 function windowResized() {
     resizeCanvas(windowWidth * 0.9, windowHeight * 0.9)
+}
+
+function keyPressed() {
+    if (key == " "){
+        redraw()
+    }
 }
