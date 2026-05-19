@@ -1,11 +1,13 @@
 const DIM = 5
 let tWidth
 
-function randCol(){
+let palette
+
+function randCol() {
     return color(random(255), random(255), random(255))
 }
 
-function getColorPair(){
+function getColorPair() {
     let col1, col2
     if (random(1) < 0.5) {
         col1 = randCol()
@@ -29,20 +31,20 @@ function concentricCircles(x, y, w) {
     rect(x, y, w, w)
 
     translate(x + w / 2, y + w / 2)
-    for (let i = layers; i > 0; i--){
-        if (currentFill == col1){
+    for (let i = layers; i > 0; i--) {
+        if (currentFill == col1) {
             currentFill = col2
         } else {
             currentFill = col1
         }
 
         fill(currentFill)
-        circle(0, 0, i*w/layers)
+        circle(0, 0, i * w / layers)
     }
     pop()
 }
 
-function checker(x, y, w){
+function checker(x, y, w) {
     const CHECKERDIM = 4
     const [col1, col2] = getColorPair()
 
@@ -50,7 +52,7 @@ function checker(x, y, w){
     translate(x, y)
     for (let j = 0; j < CHECKERDIM; j++) {
         for (let i = 0; i < CHECKERDIM; i++) {
-            if ((i + j) % 2 == 0){
+            if ((i + j) % 2 == 0) {
                 fill(col1)
             } else {
                 fill(col2)
@@ -62,9 +64,26 @@ function checker(x, y, w){
     pop()
 }
 
+function filled(x, y, w){
+    fill(randCol())
+    rect(x, y, w)
+}
+
 function setup() {
     createCanvas(600, 600);
     noStroke()
+
+    palette = [
+        color(219, 41, 13),
+        color(227, 177, 27),
+        color(235, 228, 30),
+        color(14, 179, 33),
+        color(73, 208, 245),
+        color(19, 82, 209),
+        color(130, 43, 207),
+        color(201, 18, 143),
+        color(122, 90, 13)
+    ]
 }
 
 function draw() {
@@ -79,7 +98,8 @@ function draw() {
 
             const pattern = random([
                 concentricCircles,
-                checker
+                checker,
+                filled
             ])
 
             pattern(x, y, tWidth)
