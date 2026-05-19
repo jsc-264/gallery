@@ -4,3 +4,4 @@
 - [text-particles](./text-particles/index.html)
 - [microphone](./microphone/index.html)
 - [molnar](./molnar/index.html)
+- [blake](./blake/index.html)
