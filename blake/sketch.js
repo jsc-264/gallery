@@ -7,10 +7,10 @@ function concentricCircles(x, y, w) {
     const white = color(255)
     let currentFill = random([black, white])
 
+    push()
     fill(currentFill)
     rect(x, y, w, w)
 
-    push()
     translate(x + w / 2, y + w / 2)
     for (let i = layers; i > 0; i--){
         if (currentFill == black){
@@ -25,8 +25,30 @@ function concentricCircles(x, y, w) {
     pop()
 }
 
+function checker(x, y, w){
+    const CHECKERDIM = 4
+    const black = color(0)
+    const white = color(255)
+
+    push()
+    translate(x, y)
+    for (let j = 0; j < CHECKERDIM; j++) {
+        for (let i = 0; i < CHECKERDIM; i++) {
+            if ((i + j) % 2 == 0){
+                fill(black)
+            } else {
+                fill(white)
+            }
+
+            rect(i * w / CHECKERDIM, j * w / CHECKERDIM, w / CHECKERDIM)
+        }
+    }
+    pop()
+}
+
 function setup() {
     createCanvas(600, 600);
+    noStroke()
 }
 
 function draw() {
@@ -38,7 +60,13 @@ function draw() {
         for (let i = 0; i < DIM; i++) {
             const x = tWidth * i
             const y = tWidth * j
-            concentricCircles(x, y, tWidth)
+
+            const pattern = random([
+                concentricCircles,
+                checker
+            ])
+
+            pattern(x, y, tWidth)
         }
     }
     noLoop()
