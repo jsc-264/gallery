@@ -1,11 +1,28 @@
 const DIM = 5
 let tWidth
 
+function randCol(){
+    return color(random(255), random(255), random(255))
+}
+
+function getColorPair(){
+    let col1, col2
+    if (random(1) < 0.5) {
+        col1 = randCol()
+        col2 = randCol()
+    } else {
+        col1 = color(0)
+        col2 = color(255)
+    }
+
+    return [col1, col2]
+}
+
 function concentricCircles(x, y, w) {
     const layers = 3
-    const black = color(0)
-    const white = color(255)
-    let currentFill = random([black, white])
+
+    const [col1, col2] = getColorPair()
+    let currentFill = random([col1, col2])
 
     push()
     fill(currentFill)
@@ -13,10 +30,10 @@ function concentricCircles(x, y, w) {
 
     translate(x + w / 2, y + w / 2)
     for (let i = layers; i > 0; i--){
-        if (currentFill == black){
-            currentFill = white
+        if (currentFill == col1){
+            currentFill = col2
         } else {
-            currentFill = black
+            currentFill = col1
         }
 
         fill(currentFill)
@@ -27,17 +44,16 @@ function concentricCircles(x, y, w) {
 
 function checker(x, y, w){
     const CHECKERDIM = 4
-    const black = color(0)
-    const white = color(255)
+    const [col1, col2] = getColorPair()
 
     push()
     translate(x, y)
     for (let j = 0; j < CHECKERDIM; j++) {
         for (let i = 0; i < CHECKERDIM; i++) {
             if ((i + j) % 2 == 0){
-                fill(black)
+                fill(col1)
             } else {
-                fill(white)
+                fill(col2)
             }
 
             rect(i * w / CHECKERDIM, j * w / CHECKERDIM, w / CHECKERDIM)
