@@ -132,7 +132,8 @@ function sector(x, y, w) {
 }
 
 function setup() {
-    createCanvas(600, 600);
+    const d = min(windowWidth, windowHeight)*0.9
+    createCanvas(d, d);
     noStroke()
 
     palette = [
@@ -173,7 +174,8 @@ function draw() {
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth * 0.9, windowHeight * 0.9)
+    const d = min(windowWidth, windowHeight)*0.9
+    resizeCanvas(d, d);
 }
 
 function keyPressed() {
