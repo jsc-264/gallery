@@ -4,18 +4,13 @@ let tWidth
 let palette
 
 function randCol() {
-    return color(random(255), random(255), random(255))
+    return random(palette)
 }
 
 function getColorPair() {
-    let col1, col2
-    if (random(1) < 0.5) {
-        col1 = randCol()
-        col2 = randCol()
-    } else {
-        col1 = color(0)
-        col2 = color(255)
-    }
+    const r = random()
+    const col1 = r < 0.7 ? randCol() : color(0)
+    const col2 = r < 0.7 ? randCol() : color(255)
 
     return [col1, col2]
 }
@@ -44,29 +39,94 @@ function concentricCircles(x, y, w) {
     pop()
 }
 
-function checker(x, y, w) {
-    const CHECKERDIM = 4
+function checker(x, y, w, checkerDim = 4) {
     const [col1, col2] = getColorPair()
 
     push()
     translate(x, y)
-    for (let j = 0; j < CHECKERDIM; j++) {
-        for (let i = 0; i < CHECKERDIM; i++) {
+    for (let j = 0; j < checkerDim; j++) {
+        for (let i = 0; i < checkerDim; i++) {
             if ((i + j) % 2 == 0) {
                 fill(col1)
             } else {
                 fill(col2)
             }
 
-            rect(i * w / CHECKERDIM, j * w / CHECKERDIM, w / CHECKERDIM)
+            rect(i * w / checkerDim, j * w / checkerDim, w / checkerDim)
         }
     }
     pop()
 }
 
-function filled(x, y, w){
+function filled(x, y, w) {
     fill(randCol())
     rect(x, y, w)
+}
+
+function sector(x, y, w) {
+    const layers = 3
+    const [col1, col2] = getColorPair()
+    let currentFill = random([col1, col2])
+
+    const choice = random([
+        "TR", "BR", "BL", "TL"
+    ])
+
+    let cx, cy
+    switch (choice) {
+        case "TR":
+            cx = 0
+            cy = w
+            startA = -HALF_PI
+            endA = 0
+            break;
+
+        case "BR":
+            cx = 0
+            cy = 0
+            startA = 0
+            endA = HALF_PI
+            break;
+
+        case "BL":
+            cx = w
+            cy = 0
+            startA = HALF_PI
+            endA = PI
+            break;
+
+        case "TL":
+            cx = w
+            cy = w
+            startA = PI
+            endA = -HALF_PI
+            break;
+
+        default:
+            break;
+    }
+
+    push()
+    drawingContext.save()
+    translate(x, y)
+
+    fill(currentFill)
+    rect(0, 0, w)
+
+    drawingContext.clip()
+
+    for (let i = layers; i > 1; i--) {
+        if (currentFill == col1) {
+            currentFill = col2
+        } else {
+            currentFill = col1
+        }
+
+        fill(currentFill)
+        circle(cx, cy, i * w*2 / layers)
+    }
+
+    pop()
 }
 
 function setup() {
@@ -99,7 +159,8 @@ function draw() {
             const pattern = random([
                 concentricCircles,
                 checker,
-                filled
+                filled,
+                sector
             ])
 
             pattern(x, y, tWidth)
