@@ -3,12 +3,22 @@ let tWidth
 
 let palette
 
+function flipColour(current, col1, col2){
+    if (current == col1) {
+        current = col2
+    } else {
+        current = col1
+    }
+
+    return current
+}
+
 function randCol() {
     return random(palette)
 }
 
 function getColorPair() {
-    const chance = 0.6
+    const chance = 0.5
     const r = random()
     const col1 = r < chance ? randCol() : color(0)
     const col2 = r < chance ? randCol() : color(255)
@@ -28,11 +38,7 @@ function concentricCircles(x, y, w) {
 
     translate(x + w / 2, y + w / 2)
     for (let i = layers; i > 0; i--) {
-        if (currentFill == col1) {
-            currentFill = col2
-        } else {
-            currentFill = col1
-        }
+        currentFill = flipColour(currentFill, col1, col2)
 
         fill(currentFill)
         circle(0, 0, i * w / layers)
@@ -118,16 +124,32 @@ function sector(x, y, w) {
     drawingContext.clip()
 
     for (let i = layers; i > 1; i--) {
-        if (currentFill == col1) {
-            currentFill = col2
-        } else {
-            currentFill = col1
-        }
-
+        currentFill = flipColour(currentFill, col1, col2)
         fill(currentFill)
         circle(cx, cy, i * w*2 / layers)
     }
 
+    pop()
+}
+
+function doubleTriangle(x, y, w){
+    const [col1, col2] = getColorPair()
+    let currentFill = random([col1, col2])
+
+    push()
+    translate(x, y)
+
+    fill(currentFill)
+    rect(0, 0, w)
+
+    currentFill = flipColour(currentFill, col1, col2)
+    fill(currentFill)
+
+    if (random(1) < 0.5){
+        triangle(0, 0, w, w, 0, w)
+    } else {
+        triangle(w, 0, 0, w, w, w)
+    }
     pop()
 }
 
@@ -163,7 +185,8 @@ function draw() {
                 concentricCircles,
                 checker,
                 filled,
-                sector
+                sector,
+                doubleTriangle
             ])
 
             pattern(x, y, tWidth)
