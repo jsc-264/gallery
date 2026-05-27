@@ -156,6 +156,7 @@ function doubleTriangle(x, y, w){
 function setup() {
     const d = min(windowWidth, windowHeight)*0.9
     createCanvas(d, d);
+    frameRate(1)
     noStroke()
 
     palette = [
@@ -192,17 +193,9 @@ function draw() {
             pattern(x, y, tWidth)
         }
     }
-
-    noLoop()
 }
 
 function windowResized() {
     const d = min(windowWidth, windowHeight)*0.9
     resizeCanvas(d, d);
-}
-
-function keyPressed() {
-    if (key == " "){
-        redraw()
-    }
 }
