@@ -1,10 +1,12 @@
-const DIM = 10
+let DIM = 10
 let w
 
 function setup() {
     const canvasDim = min(windowWidth, windowHeight) * 0.9
     createCanvas(canvasDim, canvasDim);
+    frameRate(1)
     w = width / DIM
+    noStroke()
 }
 
 function draw() {
@@ -33,10 +35,11 @@ function draw() {
         }
     }
 
-    noLoop()
+    // noLoop()
 }
 
 function windowResized() {
     const canvasDim = min(windowWidth, windowHeight) * 0.9
     resizeCanvas(canvasDim, canvasDim);
+    w = width / DIM
 }
