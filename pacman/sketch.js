@@ -4,13 +4,13 @@ let w
 function setup() {
     const canvasDim = min(windowWidth, windowHeight) * 0.9
     createCanvas(canvasDim, canvasDim);
-    frameRate(1)
+    frameRate(0.5)
     w = width / DIM
     noStroke()
 }
 
 function draw() {
-    background(50);
+    background(25);
 
     for (let j = 0; j < DIM; j++) {
         for (let i = 0; i < DIM; i++) {
@@ -21,7 +21,7 @@ function draw() {
             translate(x, y)
 
             if (random(1) < 0.4) {
-                fill(255, 240, 19)
+                fill(230, 200, 40)
                 circle(w/2, w/2, w)
             } else {
                 fill(0, 0, 200)
