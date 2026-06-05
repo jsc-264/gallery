@@ -1,4 +1,4 @@
-function static(intensity=20){
+function static(intensity = 20) {
     loadPixels()
 
     for (let i = 0; i < pixels.length; i++) {
@@ -18,7 +18,7 @@ function draw() {
     background(200)
     push()
 
-    for (let i = 0; i < 10; i++){
+    for (let i = 0; i < 10; i++) {
         push()
         fill(
             random(255),
@@ -26,17 +26,27 @@ function draw() {
             random(255)
         )
         noStroke()
-        rect(
-            random(width),
-            random(height),
-            random(200, width/2),
-            random(200, height/2)
-        )
+
+        if (random() < 0.5) {
+            rect(
+                random(width),
+                random(height),
+                random(200, width),
+                random(200, height)
+            )
+        } else {
+            ellipse(
+                random(width),
+                random(height),
+                random(200, width / 2),
+                random(200, height / 2)
+            )
+        }
         filter("blur", random(10, 30))
         pop()
     }
 
     pop()
 
-    static(intensity=20)
+    static(intensity = random(10, 50))
 }
