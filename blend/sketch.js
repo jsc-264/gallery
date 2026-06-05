@@ -16,8 +16,6 @@ function setup() {
 function draw() {
   background(200)
 
-  const start = millis()
-
   for (let i = 0; i < 10; i++) {
     push()
     fill(
@@ -42,16 +40,12 @@ function draw() {
         random(200, height / 2)
       )
     }
-    drawingContext.filter = "blur(8px)"
+    filter("blur", 20)
     pop()
   }
 
   static(intensity = random(10, 50))
-
-  const end = millis()
-
-  print(end - start)
-  noLoop()
+  // noLoop()
 }
 
 function windowResized() {
