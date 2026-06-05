@@ -11,12 +11,10 @@ function static(intensity = 20) {
 function setup() {
     createCanvas(windowWidth, windowHeight);
     rectMode(CENTER)
-    frameRate(1)
 }
 
 function draw() {
     background(200)
-    push()
 
     for (let i = 0; i < 10; i++) {
         push()
@@ -46,7 +44,9 @@ function draw() {
         pop()
     }
 
-    pop()
-
     static(intensity = random(10, 50))
+}
+
+function windowResized(){
+    resizeCanvas(windowWidth, windowHeight)
 }
