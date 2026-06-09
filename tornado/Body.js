@@ -5,7 +5,7 @@ class Body{
         this.r = r
         this.theta = theta
 
-        this.speed = 0.1
+        this.speed = random(0.01, 0.05)
 
         this.cart(this.r, this.theta)
     }
@@ -24,5 +24,6 @@ class Body{
 
     update(){
         this.theta += this.speed
+        this.r += random(-0.01, 0.01)
     }
 }

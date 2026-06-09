@@ -1,14 +1,20 @@
-let b
+let tornado = []
+let bodies = 50
 
 function setup() {
     createCanvas(600, 600);
-    b = new Body(100, 0, 20)
+
+    for (let i = 0; i < bodies; i++) {
+        tornado.push(new Body(random(0, width/2), random(TWO_PI), random(5, 20)))
+    }
 }
 
 function draw() {
     background(50);
-    translate(width/2, height/2)
+    translate(width / 2, height / 2)
 
-    b.render()
-    b.update()
+    tornado.forEach(b => {
+        b.render()
+        b.update()
+    })
 }
