@@ -1,4 +1,4 @@
-function static(intensity = 20) {
+function static(intensity) {
   loadPixels()
 
   for (let i = 0; i < pixels.length; i++) {
@@ -11,41 +11,41 @@ function static(intensity = 20) {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER)
+  frameRate(0.5)
+  colorMode(HSB)
 }
 
 function draw() {
   background(200)
 
+  const hues = []
+  const firstHue = random(360)
+
+  for (let i = -10; i < 10; i++) {
+    hues.push((firstHue + (i * 7) + 360) % 360)
+  }
+
+
   for (let i = 0; i < 10; i++) {
     push()
-    fill(
-      random(255),
-      random(255),
-      random(255)
-    )
+    fill(random(hues), 100, 50)
     noStroke()
 
+    const w = random(200, width)
+    const h = random(200, height)
+    const x = random(width)
+    const y = random(height)
+
     if (random() < 0.5) {
-      rect(
-        random(width),
-        random(height),
-        random(200, width),
-        random(200, height)
-      )
+      rect(x, y, w, h)
     } else {
-      ellipse(
-        random(width),
-        random(height),
-        random(200, width / 2),
-        random(200, height / 2)
-      )
+      ellipse(x, y, w, h)
     }
-    filter("blur", 20)
     pop()
   }
 
-  static(intensity = random(10, 50))
-  // noLoop()
+  filter("blur", 50)
+  static(random(20, 40))
 }
 
 function windowResized() {
