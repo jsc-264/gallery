@@ -1,18 +1,13 @@
-let r = 100
-let theta = 0
+let b
 
 function setup() {
     createCanvas(600, 600);
+    b = new Body(100, 100, 20)
 }
 
 function draw() {
     background(50);
     translate(width / 2, height / 2)
 
-    const x = r * cos(theta)
-    const y = r * sin(theta)
-
-    circle(x, y, 20)
-
-    theta += 0.1
+    b.render()
 }
