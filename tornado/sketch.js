@@ -1,6 +1,13 @@
 let tornado = []
 let bodies = 100
 
+function cart(r, t){
+    const x = r * cos(t)
+    const y = r * sin(t)
+
+    return [x, y]
+}
+
 function setup() {
     createCanvas(600, 600);
 
@@ -17,4 +24,8 @@ function draw() {
         b.render()
         b.update()
     })
+}
+
+function mouseClicked(){
+    
 }

@@ -8,7 +8,7 @@ class Body{
         this.minSpeed = 0.01
         this.calcSpeed()
 
-        this.cart(this.r, this.theta)
+        cart(this.r, this.theta)
 
         this.eyeR = 50
     }
@@ -21,21 +21,14 @@ class Body{
         }
     }
 
-    cart(r, t){
-        const x = r * cos(t)
-        const y = r * sin(t)
-
-        return [x, y]
-    }
-
     render(){
-        const [x, y] = this.cart(this.r, this.theta) 
+        const [x, y] = cart(this.r, this.theta) 
         circle(x, y, this.d)
     }
 
     update(){
         this.calcSpeed()
         this.theta += this.speed
-        this.r += this.speed > this.minSpeed ? random(-5, 5) : 1
+        this.r += this.speed > this.minSpeed ? random(-4, 5) : 1
     }
 }
