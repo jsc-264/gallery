@@ -25,7 +25,3 @@ function draw() {
         b.update()
     })
 }
-
-function mouseClicked(){
-    
-}
