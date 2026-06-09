@@ -5,20 +5,24 @@ class Body{
         this.r = r
         this.theta = theta
 
+        this.speed = 0.1
+
         this.cart(this.r, this.theta)
     }
 
     cart(r, t){
-        this.x = r * cos(t)
-        this.y = r * sin(t)
+        const x = r * cos(t)
+        const y = r * sin(t)
+
+        return [x, y]
     }
 
     render(){
-        circle(this.x, this.y, this.d)
+        const [x, y] = this.cart(this.r, this.theta) 
+        circle(x, y, this.d)
     }
 
     update(){
-        this.theta += 0.1
-        this.cart(this.r, this.theta) 
+        this.theta += this.speed
     }
 }
