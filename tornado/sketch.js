@@ -1,5 +1,5 @@
 let tornado = []
-let bodies = 50
+let bodies = 100
 
 function setup() {
     createCanvas(600, 600);

@@ -5,9 +5,20 @@ class Body{
         this.r = r
         this.theta = theta
 
-        this.speed = random(0.01, 0.05)
+        this.minSpeed = 0.01
+        this.calcSpeed()
 
         this.cart(this.r, this.theta)
+
+        this.eyeR = 50
+    }
+
+    calcSpeed(){
+        if (this.r < this.eyeR){
+            this.speed = this.minSpeed
+        } else {
+            this.speed = map(this.r, this.eyeR, width/2, 0.3, 0)
+        }
     }
 
     cart(r, t){
@@ -23,7 +34,8 @@ class Body{
     }
 
     update(){
+        this.calcSpeed()
         this.theta += this.speed
-        this.r += random(-0.01, 0.01)
+        this.r += this.speed > this.minSpeed ? random(-5, 5) : 1
     }
 }
