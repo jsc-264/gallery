@@ -2,7 +2,7 @@ class Tornado {
     constructor(radius) {
         this.totalRadius = radius
         this.eyeRadius = 30
-        this.numBodies = 200
+        this.numBodies = 100
         
         this.bodies = []
         for (let i = 0; i < this.numBodies; i++){

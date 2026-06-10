@@ -13,7 +13,8 @@ function cart(r, t) {
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    tornado = new Tornado(300)
+    tornado = new Tornado(min(width, height)/2)
+    noStroke()
 }
 
 function draw() {
