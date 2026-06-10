@@ -1,5 +1,5 @@
-class Body{
-    constructor(r, theta, d){
+class Body {
+    constructor(r, theta, d) {
         this.d = d
 
         this.r = r
@@ -13,22 +13,22 @@ class Body{
         this.eyeR = 50
     }
 
-    calcSpeed(){
-        if (this.r < this.eyeR){
+    calcSpeed() {
+        if (this.r < this.eyeR) {
             this.speed = this.minSpeed
         } else {
-            this.speed = map(this.r, this.eyeR, width/2, 0.3, 0)
+            this.speed = map(this.r, this.eyeR, width / 2, 0.3, 0)
         }
     }
 
-    render(){
-        const [x, y] = cart(this.r, this.theta) 
+    render() {
+        const [x, y] = cart(this.r, this.theta)
         circle(x, y, this.d)
     }
 
-    update(){
+    update() {
         this.calcSpeed()
         this.theta += this.speed
-        this.r += this.speed > this.minSpeed ? random(-4, 5) : 1
+        this.r += random(-1, 1)
     }
 }

@@ -1,7 +1,7 @@
 let tornado = []
-let bodies = 100
+let bodies = 200
 
-function cart(r, t){
+function cart(r, t) {
     const x = r * cos(t)
     const y = r * sin(t)
 
@@ -12,7 +12,7 @@ function setup() {
     createCanvas(600, 600);
 
     for (let i = 0; i < bodies; i++) {
-        tornado.push(new Body(random(0, width/2), random(TWO_PI), random(5, 20)))
+        tornado.push(new Body(random(0, width / 2), random(TWO_PI), random(5, 20)))
     }
 }
 
