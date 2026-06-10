@@ -19,7 +19,6 @@ function setup() {
     green = color(0, 255, 0)
 
     tornado = new Tornado(min(width, height)/2)
-    noStroke()
 }
 
 function draw() {

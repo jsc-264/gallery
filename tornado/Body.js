@@ -13,6 +13,9 @@ class Body {
         this.jitter = 1
 
         this.calcCart()
+
+        this.path = []
+        this.pathMax = 10
     }
 
     calcSpeed() {
@@ -26,8 +29,16 @@ class Body {
     render() {
         const lerpAmt = map(this.speed, this.minSpeed, this.maxSpeed, 0, 1)
         const col = lerpColor(green, red, lerpAmt)
-        fill(col)
-        circle(this.x, this.y, this.diameter)
+        const weight = map(this.speed, this.minSpeed, this.maxSpeed, 5, 1)
+        
+        strokeWeight(weight)
+        stroke(col)
+        noFill()
+        beginShape()
+        for (let p of this.path){
+            vertex(p.x, p.y)
+        }
+        endShape()
     }
 
     calcCart(){
@@ -38,11 +49,17 @@ class Body {
 
     update() {
         this.calcSpeed()
-        this.jitter = map(this.speed, this.minSpeed, this.maxSpeed, 1, 2)
+        this.jitter = map(this.speed, this.minSpeed, this.maxSpeed, 2, 5)
         
         this.angle += this.speed
         this.distance += random(-this.jitter, this.jitter)
 
         this.calcCart()
+
+        this.path.push({x: this.x, y: this.y})
+
+        if (this.path.length > this.pathMax){
+            this.path.splice(0, 1)
+        }
     }
 }
