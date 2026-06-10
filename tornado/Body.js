@@ -8,7 +8,7 @@ class Body {
         this.distance = map(this.diameter, MIN_BODY_DIAMETER, MAX_BODY_DIAMETER, this.parent.eyeRadius-10, this.parent.totalRadius)
 
         this.minSpeed = 0
-        this.maxSpeed = this.parent.direction == 1 ? 0.3 : -0.3
+        this.maxSpeed = 0.3 * this.parent.direction
 
         this.jitter = 1
 
@@ -24,6 +24,8 @@ class Body {
         } else {
             this.speed = map(this.distance, this.parent.eyeRadius, this.parent.totalRadius, this.maxSpeed, this.minSpeed)
         }
+
+        this.speed = abs(this.speed) * this.parent.direction
     }
 
     render() {
