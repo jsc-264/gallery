@@ -4,13 +4,15 @@ class Body {
         this.angle = angle
 
         this.parent = parentTornado
-
+        
         this.distance = map(this.diameter, MIN_BODY_DIAMETER, MAX_BODY_DIAMETER, this.parent.eyeRadius-10, this.parent.totalRadius)
 
         this.minSpeed = 0
-        this.maxSpeed = 0.2
+        this.maxSpeed = 0.3
 
         this.jitter = 1
+
+        this.calcCart()
     }
 
     calcSpeed() {
@@ -19,18 +21,25 @@ class Body {
         } else {
             this.speed = map(this.distance, this.parent.eyeRadius, this.parent.totalRadius, this.maxSpeed, this.minSpeed)
         }
-
-        this.jitter = map(this.speed, this.minSpeed, this.maxSpeed, 1, 2)
     }
 
     render() {
+        circle(this.x, this.y, this.diameter)
+    }
+
+    calcCart(){
         const [x, y] = cart(this.distance, this.angle)
-        circle(x, y, this.diameter)
+        this.x = x
+        this.y = y
     }
 
     update() {
         this.calcSpeed()
+        this.jitter = map(this.speed, this.minSpeed, this.maxSpeed, 1, 2)
+        
         this.angle += this.speed
         this.distance += random(-this.jitter, this.jitter)
+
+        this.calcCart()
     }
 }
