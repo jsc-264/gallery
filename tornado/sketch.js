@@ -1,6 +1,8 @@
 const MIN_BODY_DIAMETER = 5
 const MAX_BODY_DIAMETER = 20
 
+let red, green
+
 let tornado
 
 function cart(r, t) {
@@ -12,6 +14,9 @@ function cart(r, t) {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+
+    red = color(255, 0, 0)
+    green = color(0, 255, 0)
 
     tornado = new Tornado(min(width, height)/2)
     noStroke()

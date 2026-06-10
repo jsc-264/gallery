@@ -24,6 +24,9 @@ class Body {
     }
 
     render() {
+        const lerpAmt = map(this.speed, this.minSpeed, this.maxSpeed, 0, 1)
+        const col = lerpColor(green, red, lerpAmt)
+        fill(col)
         circle(this.x, this.y, this.diameter)
     }
 
