@@ -1,34 +1,34 @@
 class Body {
-    constructor(r, theta, d) {
-        this.d = d
+    constructor(distance, angle, size) {
+        this.size = size
 
-        this.r = r
-        this.theta = theta
+        this.distance = distance
+        this.angle = angle
 
         this.minSpeed = 0.01
         this.calcSpeed()
 
-        cart(this.r, this.theta)
+        cart(this.distance, this.angle)
 
         this.eyeR = 50
     }
 
     calcSpeed() {
-        if (this.r < this.eyeR) {
+        if (this.distance < this.eyeR) {
             this.speed = this.minSpeed
         } else {
-            this.speed = map(this.r, this.eyeR, width / 2, 0.3, 0)
+            this.speed = map(this.distance, this.eyeR, width / 2, 0.3, 0)
         }
     }
 
     render() {
-        const [x, y] = cart(this.r, this.theta)
-        circle(x, y, this.d)
+        const [x, y] = cart(this.distance, this.angle)
+        circle(x, y, this.size)
     }
 
     update() {
         this.calcSpeed()
-        this.theta += this.speed
-        this.r += random(-1, 1)
+        this.angle += this.speed
+        this.distance += random(-1, 1)
     }
 }
