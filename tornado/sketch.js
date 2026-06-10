@@ -8,9 +8,9 @@ function cart(r, t) {
 }
 
 function setup() {
-    createCanvas(600, 600);
+    createCanvas(windowWidth, windowHeight);
 
-    tornado = new Tornado(width/2)
+    tornado = new Tornado(300)
 }
 
 function draw() {
