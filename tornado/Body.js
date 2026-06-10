@@ -8,7 +8,7 @@ class Body {
         this.distance = map(this.diameter, MIN_BODY_DIAMETER, MAX_BODY_DIAMETER, this.parent.eyeRadius-10, this.parent.totalRadius)
 
         this.minSpeed = 0
-        this.maxSpeed = 0.3
+        this.maxSpeed = this.parent.direction == 1 ? 0.3 : -0.3
 
         this.jitter = 1
 
@@ -27,8 +27,8 @@ class Body {
     }
 
     render() {
-        const lerpAmt = map(this.speed, this.minSpeed, this.maxSpeed, 0, 1)
-        const col = lerpColor(green, red, lerpAmt)
+        const hu = map(this.speed, this.minSpeed, this.maxSpeed, 150, 0)
+        const col = color(hu, 100, 75)
         const weight = map(this.speed, this.minSpeed, this.maxSpeed, 5, 1)
         
         strokeWeight(weight)

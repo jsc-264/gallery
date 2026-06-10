@@ -3,6 +3,7 @@ class Tornado {
         this.totalRadius = radius
         this.eyeRadius = 30
         this.numBodies = 100
+        this.direction = random([-1, 1])
         
         this.bodies = []
         for (let i = 0; i < this.numBodies; i++){
