@@ -1,3 +1,6 @@
+const MIN_BODY_DIAMETER = 5
+const MAX_BODY_DIAMETER = 20
+
 let tornado
 
 function cart(r, t) {

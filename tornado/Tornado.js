@@ -6,7 +6,11 @@ class Tornado {
         
         this.bodies = []
         for (let i = 0; i < this.numBodies; i++){
-            this.bodies.push(new Body(random(0, this.totalRadius), random(TWO_PI), random(5, 20)))
+            this.bodies.push(new Body(
+                random(MIN_BODY_DIAMETER, MAX_BODY_DIAMETER),
+                random(TWO_PI),
+                this
+            ))
         }
     }
 
@@ -18,7 +22,6 @@ class Tornado {
 
     update(){
         this.bodies.forEach(body => {
-            body.calcSpeed(this.totalRadius, this.eyeRadius)
             body.update()
         })
     }
