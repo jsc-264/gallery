@@ -23,5 +23,9 @@ void draw(){
     if (f.startedFalling()) {
       f.explode();
     }
+    
+    if (f.hitGround()){
+      f.reset();
+    }
   }
 }
