@@ -8,4 +8,5 @@ void setup(){
 void draw(){
   background(0);
   f.render();
+  f.update();
 }

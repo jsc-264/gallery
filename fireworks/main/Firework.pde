@@ -8,16 +8,17 @@ class Firework{
     pos = new PVector(tempX, tempY);
     size = tempSize;
     
-    vel = new PVector(0, -1);
+    vel = new PVector(0, 1);
     acc = new PVector(0, 0);
   }
   
   void render(){
-    circle(x, y, size);
+    circle(pos.x, pos.y, size);
   }
   
-  void render(){
-    vel.add(acc)
+  void update(){
+    vel.add(acc);
+    pos.add(vel);
   }
   
 }
