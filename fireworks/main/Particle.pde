@@ -1,11 +1,14 @@
 class Particle extends Firework{
   PVector vel;
-  Particle(float tempX, float tempY, PVector tempVel, float tempSize){
+  color col;
+  Particle(float tempX, float tempY, PVector tempVel, float tempSize, color tempCol){
     super(tempX, tempY, tempSize);
     vel = tempVel;
+    col = tempCol;
   }
   
   void render(){
+    fill(col);
     circle(pos.x, pos.y, size);
   }
   

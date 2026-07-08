@@ -6,16 +6,21 @@ class Firework{
   int numParticles = 5;
   ArrayList<Particle> particles = new ArrayList<Particle>();
   boolean exploded = false;
+  color col;
   
   Firework(float tempX, float tempY, float tempSize){
     pos = new PVector(tempX, tempY);
     size = tempSize;
     
-    vel = new PVector(0, random(-25, -15));
+    vel = new PVector(0, random(-20, -10));
+     
+
+    col = color(random(180, 300), 100, 100);
   }
   
   void render(){
     if (particles.size() == 0){
+      fill(col);
       circle(pos.x, pos.y, size);
       return;
     }
@@ -43,8 +48,8 @@ class Firework{
   void explode(){
     if (!exploded){
       for (int i = 0; i < numFireworks; i++){
-        PVector v = PVector.random2D().mult(random(1.5, 4));
-        particles.add(new Particle(pos.x, pos.y, v, 5));
+        PVector v = PVector.random2D().mult(random(2, 6));
+        particles.add(new Particle(pos.x, pos.y, v, 5, col));
       }
     }
     
