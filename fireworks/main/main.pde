@@ -9,7 +9,7 @@ void setup(){
   gravity = new PVector(0, 0.5);
   
   for (int i = 0; i < numFireworks; i++){
-    fireworks.add(new Firework(random(width), 10));
+    fireworks.add(new Firework(random(width), height, 10));
   }
 }
 
@@ -21,7 +21,7 @@ void draw(){
     f.update();
 
     if (f.startedFalling()) {
-      fireworks.remove(i);
+      f.explode();
     }
   }
 }
