@@ -14,8 +14,7 @@ class Firework{
     
     vel = new PVector(0, random(-20, -10));
      
-
-    col = color(random(180, 300), 100, 100);
+    col = color(random(180, 330), 100, 100);
   }
   
   void render(){
@@ -34,7 +33,6 @@ class Firework{
     vel.add(gravity);
     pos.add(vel);
 
-    
     for (int i = particles.size() - 1; i >= 0; i--) {
       Particle part = particles.get(i);
       part.update();
