@@ -1,6 +1,6 @@
 PVector gravity;
 
-int numFireworks = 20;
+int numFireworks = 30;
 ArrayList<Firework> fireworks = new ArrayList<Firework>();
 
 
@@ -30,5 +30,5 @@ void draw(){
     if (f.hitGround()){
       f.reset();
     }
-  }
+  }  
 }

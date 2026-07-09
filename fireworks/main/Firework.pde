@@ -14,7 +14,8 @@ class Firework{
     
     vel = new PVector(0, random(-20, -10));
      
-    col = color(random(180, 330), 100, 100);
+    float hue = map(pos.x, 0, width, 180, 330);
+    col = color(hue, 100, 100);
   }
   
   void render(){
@@ -61,6 +62,8 @@ class Firework{
   void reset(){
     pos = new PVector(random(width), height);
     vel = new PVector(0, random(-25, -15));
+    float hue = map(pos.x, 0, width, 180, 330);
+    col = color(hue, 100, 100);
     particles.clear();
     exploded = false;
   }
