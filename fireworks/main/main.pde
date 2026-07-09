@@ -1,6 +1,6 @@
 PVector gravity;
 
-int numFireworks = 30;
+int numFireworks = 20;
 ArrayList<Firework> fireworks = new ArrayList<Firework>();
 
 

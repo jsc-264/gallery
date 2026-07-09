@@ -47,7 +47,7 @@ class Firework{
   void explode(){
     if (!exploded){
       for (int i = 0; i < numFireworks; i++){
-        PVector v = PVector.random2D().mult(random(2, 6));
+        PVector v = PVector.random2D().mult(random(2, 8));
         particles.add(new Particle(pos.x, pos.y, v, 5, col));
       }
     }
