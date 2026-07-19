@@ -1,4 +1,11 @@
-let rad = 10
+const defaultSpacing = 12
+let spacing = defaultSpacing
+
+const numBlobs = 35
+
+const defaultRad = 30
+let rad = defaultRad
+
 let nz = 0
 
 function setup() {
@@ -11,11 +18,11 @@ function draw() {
     background(200)
 
     let blobs = []
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < numBlobs; i++) {
         let blob = []
         for (let a = 0; a < 360; a++) {
-            const nx = (rad * cos(a) + width / 2) / 75
-            const ny = (rad * sin(a) + height / 2) / 75
+            const nx = (rad * cos(a) + width / 2) / rad
+            const ny = (rad * sin(a) + height / 2) / rad
             const nVal = noise(nx, ny, nz)
 
             const change = map(nVal, 0, 1, -rad / 5, rad / 5)
@@ -27,7 +34,8 @@ function draw() {
             blob.push({ x: x, y: y })
         }
         blobs.push(blob)
-        rad += 10
+        rad += spacing
+        spacing -= 0.3
     }
 
     for (let blob of blobs) {
@@ -38,6 +46,7 @@ function draw() {
         endShape(CLOSE)
     }
 
-    rad = 50
-    nz+=0.03
+    rad = defaultRad
+    nz += 0.03
+    spacing = defaultSpacing
 }
