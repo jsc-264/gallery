@@ -1,7 +1,7 @@
-const defaultSpacing = 12
+const defaultSpacing = 14
 let spacing = defaultSpacing
 
-const numBlobs = 35
+const numBlobs = 40
 
 const defaultRad = 30
 let rad = defaultRad
@@ -13,6 +13,7 @@ let noiseOffY
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+    colorMode(HSB)
 
     noiseOffX = width/2
     noiseOffY = height/2
@@ -22,7 +23,7 @@ function setup() {
 }
 
 function draw() {
-    background(200)
+    background("#D3C0D2")
 
     let blobs = []
     for (let i = 0; i < numBlobs; i++) {
@@ -35,16 +36,17 @@ function draw() {
             const change = map(nVal, 0, 1, -rad / 5, rad / 5)
             const pRad = rad + change
 
-            const x = pRad * cos(a) + width / 2
-            const y = pRad * sin(a) + height / 2
+            const x = pRad * cos(a) + width/2
+            const y = pRad * sin(a) + height/2
 
             blob.push({ x: x, y: y })
         }
         blobs.push(blob)
         rad += spacing
-        spacing -= 0.3
+        spacing -= 0.2
     }
 
+    strokeWeight(3)
     for (let blob of blobs) {
         beginShape()
         for (let p of blob) {
@@ -59,13 +61,13 @@ function draw() {
 }
 
 function mouseDragged(){
-    noiseOffX = mouseX + width/2
-    noiseOffY = mouseY + height/2
+    noiseOffX = mouseX
+    noiseOffY = mouseY
 }
 
 function touchMoved() {
     for (let touch of touches){
-        noiseOffX = touch.x + width/2
-        noiseOffY = touch.y + height/2
+        noiseOffX = touch.x
+        noiseOffY = touch.y
     }
 }
