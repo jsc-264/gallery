@@ -8,8 +8,15 @@ let rad = defaultRad
 
 let nz = 0
 
+let noiseOffX
+let noiseOffY
+
 function setup() {
-    createCanvas(500, 500);
+    createCanvas(windowWidth, windowHeight);
+
+    noiseOffX = width/2
+    noiseOffY = height/2
+
     angleMode(DEGREES);
     noFill()
 }
@@ -21,8 +28,8 @@ function draw() {
     for (let i = 0; i < numBlobs; i++) {
         let blob = []
         for (let a = 0; a < 360; a++) {
-            const nx = (rad * cos(a) + width / 2) / rad
-            const ny = (rad * sin(a) + height / 2) / rad
+            const nx = (rad * cos(a) + noiseOffX) / rad
+            const ny = (rad * sin(a) + noiseOffY) / rad
             const nVal = noise(nx, ny, nz)
 
             const change = map(nVal, 0, 1, -rad / 5, rad / 5)
@@ -49,4 +56,16 @@ function draw() {
     rad = defaultRad
     nz += 0.03
     spacing = defaultSpacing
+}
+
+function mouseDragged(){
+    noiseOffX = mouseX + width/2
+    noiseOffY = mouseY + height/2
+}
+
+function touchMoved() {
+    for (let touch of touches){
+        noiseOffX = touch.x + width/2
+        noiseOffY = touch.y + height/2
+    }
 }
