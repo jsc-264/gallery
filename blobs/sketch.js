@@ -61,13 +61,13 @@ function draw() {
 }
 
 function mouseDragged(){
-    noiseOffX = mouseX
-    noiseOffY = mouseY
+    noiseOffX = noise(mouseX/1000, nz) * 1000
+    noiseOffY = noise(mouseY/1000, nz) * 1000
 }
 
 function touchMoved() {
     for (let touch of touches){
-        noiseOffX = touch.x
-        noiseOffY = touch.y
+        noiseOffX = noise(touch.x/1000, nz) * 1000
+        noiseOffY = noise(touch.y/1000, nz) * 1000
     }
 }
