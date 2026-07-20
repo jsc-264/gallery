@@ -11,6 +11,9 @@ let nz = 0
 let noiseOffX
 let noiseOffY
 
+let startCol
+let endCol
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
     colorMode(HSB)
@@ -18,12 +21,15 @@ function setup() {
     noiseOffX = width/2
     noiseOffY = height/2
 
+    startCol = color("#b00808")
+    endCol = color("#960096")
+
     angleMode(DEGREES);
     noFill()
 }
 
 function draw() {
-    background("#D3C0D2")
+    background("#c0c1d3")
 
     push()
     translate(width/2, height/2)
@@ -31,7 +37,8 @@ function draw() {
     let blobs = []
     for (let i = 0; i < numBlobs; i++) {
         let blob = []
-        for (let a = 0; a < 360; a+=20) {
+        let res = map(i, 0, numBlobs, 20, 3)
+        for (let a = 0; a < 360; a+=res) {
             const nx = (rad * cos(a) + noiseOffX) / rad
             const ny = (rad * sin(a) + noiseOffY) / rad
             const nVal = noise(nx, ny, nz)
@@ -50,9 +57,12 @@ function draw() {
     }
 
     strokeWeight(3)
-    for (let blob of blobs) {
+    for (let i = 0; i < blobs.length; i++) {
+        const t = map(i, 0, blobs.length, 0, 1)
+        const col = lerpColor(startCol, endCol, t)
+        stroke(col)
         beginShape()
-        for (let p of blob) {
+        for (let p of blobs[i]) {
             vertex(p.x, p.y)
         }
         endShape(CLOSE)
