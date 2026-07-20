@@ -25,19 +25,22 @@ function setup() {
 function draw() {
     background("#D3C0D2")
 
+    push()
+    translate(width/2, height/2)
+
     let blobs = []
     for (let i = 0; i < numBlobs; i++) {
         let blob = []
-        for (let a = 0; a < 360; a++) {
+        for (let a = 0; a < 360; a+=20) {
             const nx = (rad * cos(a) + noiseOffX) / rad
             const ny = (rad * sin(a) + noiseOffY) / rad
             const nVal = noise(nx, ny, nz)
 
-            const change = map(nVal, 0, 1, -rad / 5, rad / 5)
+            const change = map(nVal, 0, 1, -rad / 3, rad / 3)
             const pRad = rad + change
 
-            const x = pRad * cos(a) + width/2
-            const y = pRad * sin(a) + height/2
+            const x = pRad * cos(a)
+            const y = pRad * sin(a)
 
             blob.push({ x: x, y: y })
         }
@@ -55,8 +58,10 @@ function draw() {
         endShape(CLOSE)
     }
 
+    pop()
+
     rad = defaultRad
-    nz += 0.03
+    nz += 0.02
     spacing = defaultSpacing
 }
 
