@@ -1,13 +1,18 @@
-let s
+let slimes = []
+let numSlimes = 20
 
 function setup() {
     createCanvas(800, 600);
     rectMode(CENTER)
-    s = new Slime(100, 100)
+    for (let i = 0; i < numSlimes; i++) {
+        slimes.push(new Slime())
+    }
 }
 
 function draw() {
-    background(220);
-    s.update()
-    s.render()
+    background(100);
+    for (let s of slimes) {
+        s.update()
+        s.render()
+    }
 }

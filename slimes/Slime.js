@@ -1,11 +1,11 @@
 class Slime {
-    constructor(x, y){
+    constructor(){
         this.x = random(width)
         this.y = random(height)
         this.grow()
 
-        this.vx = 1
-        this.vy = 1
+        this.vx = random(2, 5) * random([-1, 1])
+        this.vy = random(2, 5) * random([-1, 1])
     }
 
     render(){
@@ -15,8 +15,8 @@ class Slime {
     grow(){
         let pidX = map(this.x, 0, width, 0, PI)
         let pidY = map(this.y, 0, height, 0, PI)
-        let newW = map(sin(pidX), 0, 1, 0, 200)
-        let newH = map(sin(pidY), 0, 1, 0, 200)
+        let newW = map(sin(pidX), 0, 1, 0, 100)
+        let newH = map(sin(pidY), 0, 1, 0, 100)
 
         this.w = newW
         this.h = newH
