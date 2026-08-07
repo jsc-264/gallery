@@ -2,6 +2,7 @@ let s
 
 function setup() {
     createCanvas(800, 600);
+    rectMode(CENTER)
     s = new Slime(100, 100)
 }
 
