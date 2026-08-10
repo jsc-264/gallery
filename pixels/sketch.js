@@ -1,10 +1,12 @@
-const DIM = 50
+const DIM = 128
 let img
 let res
 let z = 0
 
+let shiftX, shiftY
+
 function colFromImg(x, y) {
-    const index = ((x%width) + (y%height) * width) * 4
+    const index = (((x + width) % width) + ((y + width) % height) * width) * 4
 
     const r = img.pixels[index]
     const g = img.pixels[index + 1]
@@ -15,7 +17,18 @@ function colFromImg(x, y) {
 }
 
 async function setup() {
-    createCanvas(500, 500);
+    createCanvas(512, 512);
+
+    let picked = false
+    while (!picked){
+        shiftX = random(-20, 20)
+        shiftY = random(-20, 20)
+
+        if (shiftX != 0 && shiftY != 0){
+            picked = true
+        }
+    }
+
     res = width / DIM
     img = await loadImage("/assets/northern.jpg")
     img.resize(width, height)
@@ -29,22 +42,20 @@ function draw() {
     img.loadPixels()
     for (let j = 0; j < img.height; j += res) {
         for (let i = 0; i < img.width; i += res) {
-            const outCol = colFromImg(i, j)
+            let col = colFromImg(i, j)
 
-            fill(outCol)
-            rect(i, j, res)
 
-            if (noise(i, j) < 0.5) {
-                const n = noise(i / (DIM * 100), j / (DIM * 100), z)
-                const diff = floor(n * DIM / 4)
-                const inCol = colFromImg(i + (res * diff), j + (res * diff))
-
-                fill(inCol)
-                rect(i + res / 4, j + res / 4, res / 2)
+            if (noise(i / DIM, j / DIM) < 0.5) {
+                const n = noise(i / (DIM * 10), j / (DIM * 10), z)
+                const diffX = floor(n * DIM/shiftX)
+                const diffY = floor(n * DIM /shiftY)
+                col = colFromImg(i + (res * diffX), j + (res * diffY))
             }
+            fill(col)
+            rect(i, j, res)
         }
     }
     img.updatePixels()
 
-    z+=0.1
+    z += 0.05
 }
