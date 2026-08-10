@@ -1,11 +1,9 @@
 class Slime {
     constructor(){
-        this.x = random(width)
-        this.y = random(height)
+        this.pos = createVector(random(width), random(height))
         this.grow()
 
-        this.vx = random(2, 5) * random([-1, 1])
-        this.vy = random(2, 5) * random([-1, 1])
+        this.vel = p5.Vector.random2D().mult(random(2, 5))
 
         const hu = random(360)
         this.fill = color(hu, 50, 100)
@@ -16,12 +14,12 @@ class Slime {
         strokeWeight(5)
         stroke(this.border)
         fill(this.fill)
-        rect(this.x, this.y, this.w, this.h, 20)
+        rect(this.pos.x, this.pos.y, this.w, this.h, 20)
     }
 
     grow(){
-        let pidX = map(this.x, 0, width, 0, PI)
-        let pidY = map(this.y, 0, height, 0, PI)
+        let pidX = map(this.pos.x, 0, width, 0, PI)
+        let pidY = map(this.pos.y, 0, height, 0, PI)
         let newW = map(sin(pidX), 0, 1, 0, width/ 4)
         let newH = map(sin(pidY), 0, 1, 0, height/4)
 
@@ -30,28 +28,36 @@ class Slime {
     }
 
     update(){
-        if (this.x <= 0){
-            this.x = 0
-            this.vx *= -1
+        let hit = false
+        if (this.pos.x <= 0){
+            this.pos.x = 0
+            this.vel.x *= -1
+            hit = true
         }
 
-        if (this.x >= width) {
-            this.x = width
-            this.vx *= -1
+        if (this.pos.x >= width) {
+            this.pos.x = width
+            this.vel.x *= -1
+            hit = true
         }
 
-        if (this.y <= 0) {
-            this.y = 0
-            this.vy *= -1
+        if (this.pos.y <= 0) {
+            this.pos.y = 0
+            this.vel.y *= -1
+            hit = true
         }
 
-        if (this.y >= height) {
-            this.y = height
-            this.vy *= -1
+        if (this.pos.y >= height) {
+            this.pos.y = height
+            this.vel.y *= -1
+            hit = true
         }
 
-        this.x += this.vx
-        this.y += this.vy
+        if (hit) {
+            this.vel.rotate(random(TWO_PI))
+        }
+
+        this.pos.add(this.vel)
         this.grow()
     }
 }

@@ -17,3 +17,7 @@ function draw() {
         s.render()
     }
 }
+
+function windowResized(){
+    resizeCanvas(windowWidth, windowHeight)
+}
