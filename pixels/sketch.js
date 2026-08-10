@@ -1,12 +1,18 @@
-const DIM = 128
+let DIM
 let img
 let res
 let z = 0
 
 let shiftX, shiftY
 
+function minDim() {
+    return min(windowWidth, windowHeight)
+}
+
 function colFromImg(x, y) {
-    const index = (((x + width) % width) + ((y + width) % height) * width) * 4
+    const newX = (x + width) % width
+    const newY = (y + height) % height
+    const index = (newX + newY * width) * 4
 
     const r = img.pixels[index]
     const g = img.pixels[index + 1]
@@ -17,7 +23,9 @@ function colFromImg(x, y) {
 }
 
 async function setup() {
-    createCanvas(512, 512);
+    const md = minDim()
+    createCanvas(md, md);
+    DIM = md / 4
 
     let picked = false
     while (!picked){
@@ -44,8 +52,7 @@ function draw() {
         for (let i = 0; i < img.width; i += res) {
             let col = colFromImg(i, j)
 
-
-            if (noise(i / DIM, j / DIM) < 0.5) {
+            if (noise(i / DIM, j / DIM, z) < 0.5) {
                 const n = noise(i / (DIM * 10), j / (DIM * 10), z)
                 const diffX = floor(n * DIM/shiftX)
                 const diffY = floor(n * DIM /shiftY)
@@ -57,5 +64,5 @@ function draw() {
     }
     img.updatePixels()
 
-    z += 0.05
+    z += 0.005
 }
