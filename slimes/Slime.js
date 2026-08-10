@@ -5,7 +5,7 @@ class Slime {
 
         this.vel = p5.Vector.random2D().mult(random(2, 5))
 
-        const hu = random(360)
+        const hu = random(huStart, huStart+90)
         this.fill = color(hu, 50, 100)
         this.border = color(hu, 100, 100)
     }

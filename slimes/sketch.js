@@ -1,10 +1,14 @@
 let slimes = []
 let numSlimes = 20
+let huStart
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     rectMode(CENTER)
     colorMode(HSB)
+
+    huStart = random(270)
+
     for (let i = 0; i < numSlimes; i++) {
         slimes.push(new Slime())
     }
