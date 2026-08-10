@@ -33,10 +33,12 @@ function draw() {
             fill(outCol)
             rect(i, j, res)
 
-            const inCol = colFromImg(i + res, j + res)
+            if (random(1) < 0.5) {
+                const inCol = colFromImg(i + res, j + res)
 
-            fill(inCol)
-            rect(i + res / 4, j + res / 4, res / 2)
+                fill(inCol)
+                rect(i + res / 4, j + res / 4, res / 2)
+            }
         }
     }
     img.updatePixels()
