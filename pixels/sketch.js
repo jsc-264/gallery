@@ -2,7 +2,7 @@ const DIM = 20
 let img
 let res
 
-function colFromImg(x, y){
+function colFromImg(x, y) {
     const index = (x + y * width) * 4
 
     const r = img.pixels[index]
@@ -26,12 +26,17 @@ function draw() {
     // image(img, 0, 0, width, height)
 
     img.loadPixels()
-    for (let j = 0; j < img.height; j+=res) {
-        for (let i = 0; i < img.width; i+=res) {
-            const col = colFromImg(i, j)
+    for (let j = 0; j < img.height; j += res) {
+        for (let i = 0; i < img.width; i += res) {
+            const outCol = colFromImg(i, j)
 
-            fill(col)
+            fill(outCol)
             rect(i, j, res)
+
+            const inCol = colFromImg(i + res, j + res)
+
+            fill(inCol)
+            rect(i + res / 4, j + res / 4, res / 2)
         }
     }
     img.updatePixels()
