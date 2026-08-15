@@ -11,14 +11,17 @@ function setup() {
     brightCol = color(163, 196, 255)
     darkCol = color(5, 0, 37)
 
-    sun = new Body(width / 2, height / 2, false)
-    moon = new Body(100, 100, true)
+    sun = new Body(width / 2, height / 2, false, color(200, 200, 0))
+    moon = new Body(100, 100, true, color(200))
+    noStroke()
 }
 
 function draw() {
     const d = BodyDistance(sun, moon)
-    const darkness = map(d, 0, 500, 1, 0)
-    print(d, darkness)
+    let darkness = 0
+    if (d < 200) {
+        darkness = map(d, 0, 200, 1, 0)
+    }
     const col = lerpColor(brightCol, darkCol, darkness)
     background(col);
     sun.render()
@@ -28,20 +31,23 @@ function draw() {
 }
 
 class Body {
-    constructor(x, y, moving) {
+    constructor(x, y, moving, color) {
         this.pos = createVector(x, y)
         this.moving = moving
 
         if (this.moving) {
             this.vel = createVector(10, 0)
-            this.angle = 0.05
+            this.angle = random(-0.1, 0.1)
             this.vel.rotate(this.angle)
         }
 
         this.r = 100
+
+        this.color = color
     }
 
     render() {
+        fill(this.color)
         circle(this.pos.x, this.pos.y, this.r)
     }
 
@@ -52,8 +58,12 @@ class Body {
                 this.pos.y += this.r / 4
             }
 
-            if (this.pos.y > height + this.r){
+            if (this.pos.y > height + this.r) {
                 this.pos.y = -this.r
+            }
+
+            if (this.pos.y < -this.r) {
+                this.pos.y = height + this.r
             }
             this.pos.add(this.vel)
         }
