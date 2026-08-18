@@ -1,10 +1,10 @@
-let myShader;
+let shad;
 async function setup() {
-    myShader = await loadShader("shader.vert", "shader.frag");
+    shad = await loadShader("shader.vert", "shader.frag");
     createCanvas(500, 500, WEBGL);
     noStroke();
 }
 function draw() {
-    shader(myShader);
+    shader(shad);
     plane(width, height);
 }
