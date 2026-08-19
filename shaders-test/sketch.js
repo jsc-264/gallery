@@ -1,10 +1,13 @@
 let shad;
 async function setup() {
-    shad = await loadShader("shader.vert", "shader.frag");
     createCanvas(500, 500, WEBGL);
-    noStroke();
+
+    shad = await loadShader("shader.vert", "shader.frag");
+    shader(shad);
 }
 function draw() {
-    shader(shad);
+    background(0)
+    noStroke()
+    shad.setUniform("mouseX", mouseX/width)
     plane(width, height);
 }
