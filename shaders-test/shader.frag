@@ -2,14 +2,22 @@ precision highp float;
 
 varying vec2 pos;
 
-uniform float mouseX;
-uniform float mouseY;
+uniform float millis;
+
+vec4 inCircle(float x,float y,float rad){
+    vec4 bg=vec4(.3725,.1725,.651,1.);
+    vec4 fill=vec4(.1137,.4118,.6549,1.);
+    vec2 centre=vec2(x,y);
+    float d=distance(pos,centre);
+    d=smoothstep(0.,rad,d);
+    vec4 col=mix(fill,bg,d);
+    return col;
+}
 
 void main(){
-    vec4 col=vec4(.2588,.1922,.502,1.);
-    vec2 centre=vec2(mouseX, mouseY);
-    if(distance(pos,centre)<.3){
-        col=vec4(.2549,.4549,.8,1.);
-    }
+    float rad = .2;
+    float x = cos(millis/4000.);
+    float y = sin(millis/4000.);
+    vec4 col=inCircle(x,y,rad);
     gl_FragColor=col;
 }

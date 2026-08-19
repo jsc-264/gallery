@@ -5,10 +5,10 @@ async function setup() {
     shad = await loadShader("shader.vert", "shader.frag");
     shader(shad);
 }
+
 function draw() {
     background(0)
     noStroke()
-    shad.setUniform("mouseX", mouseX/width)
-    shad.setUniform("mouseY", mouseY/height)
+    shad.setUniform("millis", millis())
     plane(width, height);
 }
