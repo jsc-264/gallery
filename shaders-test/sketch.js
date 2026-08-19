@@ -9,5 +9,6 @@ function draw() {
     background(0)
     noStroke()
     shad.setUniform("mouseX", mouseX/width)
+    shad.setUniform("mouseY", mouseY/height)
     plane(width, height);
 }
