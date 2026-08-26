@@ -9,6 +9,6 @@ async function setup() {
 function draw() {
     background(0)
     noStroke()
-    shad.setUniform("millis", millis())
+    shad.setUniform("millis", millis());
     plane(width, height);
 }
