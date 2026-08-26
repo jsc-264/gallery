@@ -1,5 +1,5 @@
 let palette
-let maxLines = 100
+let maxLines = 20
 
 let lines = []
 
@@ -27,18 +27,31 @@ function setup() {
 function draw() {
     background(palette.bg);
 
-    lines.push({
-        col: random(palette.lines),
-        x: width/2,
-        y: 0,
-        w: 10,
-        h: height
-    })
+    let data = {}
+    let dir = random(["h", "v"])
+    if (dir == "v"){
+        data.x = random(width)
+        data.y = 0
+        data.w = random(10, 40)
+        data.h = height
+    } else if (dir == "h"){
+        data.x = 0
+        data.y = random(height)
+        data.w = width
+        data.h = random(10, 40)
+    }
+    data.col = random(palette.lines)
+
+    lines.push(data)
+
+    if (lines.length > maxLines){
+        lines.shift()
+    }
 
     if (lines.length > 0) {
         drawLines()
     }
-    noLoop()
+    // noLoop()
 }
 
 function windowResized() {
