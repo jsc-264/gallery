@@ -3,6 +3,13 @@ let maxLines = 20
 
 let lines = []
 
+let minSize = 5
+let maxSize = 50
+
+let mouseDist
+
+let center
+
 function drawLines() {
     for (let line of lines) {
         fill(line.col)
@@ -12,6 +19,11 @@ function drawLines() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+    mouseDist = max(width, height)/1.5
+    center = {
+        x: width / 2,
+        y: height / 2
+    }
     palette = {
         bg: color("#F5DEB3"),
         lines: [
@@ -22,6 +34,8 @@ function setup() {
         ]
     }
     noStroke()
+
+
 }
 
 function draw() {
@@ -29,22 +43,22 @@ function draw() {
 
     let data = {}
     let dir = random(["h", "v"])
-    if (dir == "v"){
-        data.x = random(width)
+    if (dir == "v") {
+        data.x = random(center.x - mouseDist / 2, center.x + mouseDist / 2)
         data.y = 0
-        data.w = random(10, 40)
+        data.w = random(minSize, maxSize)
         data.h = height
-    } else if (dir == "h"){
+    } else if (dir == "h") {
         data.x = 0
-        data.y = random(height)
+        data.y = random(center.y - mouseDist / 2, center.y + mouseDist / 2)
         data.w = width
-        data.h = random(10, 40)
+        data.h = random(minSize, maxSize)
     }
     data.col = random(palette.lines)
 
     lines.push(data)
 
-    if (lines.length > maxLines){
+    if (lines.length > maxLines) {
         lines.shift()
     }
 
@@ -54,6 +68,26 @@ function draw() {
     // noLoop()
 }
 
+function mouseDragged() {
+    center = {
+        x: mouseX,
+        y: mouseY
+    }
+}
+
+function touchStarted() {
+    for (let touch of touches) {
+        center = {
+            x: touch.x,
+            y: touch.y
+        }
+    }
+}
+
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight)
+    center = {
+        x: width / 2,
+        y: height / 2
+    }
 }
