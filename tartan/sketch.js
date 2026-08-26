@@ -1,7 +1,7 @@
 let palette
 
 function setup() {
-    createCanvas(800, 600);
+    createCanvas(windowWidth, windowHeight);
     palette = {
         bg: color("#F5DEB3"),
         lines: [
@@ -15,4 +15,8 @@ function setup() {
 
 function draw() {
     background(palette.bg);
+}
+
+function windowResized(){
+    resizeCanvas(windowWidth, windowHeight)
 }
