@@ -38,7 +38,7 @@ async function setup() {
     }
 
     res = width / DIM
-    img = await loadImage("/assets/northern.jpg")
+    img = await loadImage("./assets/northern.jpg")
     img.resize(width, height)
     noStroke()
 }
