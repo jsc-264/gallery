@@ -12,7 +12,8 @@ function init(){
 }
 
 function setup() {
-    createCanvas(windowWidth,windowWidth);
+    let mdim = min(windowWidth, windowHeight)-10
+    createCanvas(mdim, mdim);
     colorMode(HSB)
     w = width / DIM
 
@@ -46,21 +47,31 @@ function draw() {
             let offX = map(n, 0, 1, -w * xom, w * xom)
             let offY = map(n, 0, 1, -w * yom, w * yom)
 
+            x += offX
+            y += offY
+
             let hu = map(n, .2, .8, 180, 360)
             let sa = map(n, .2, .8, 75, 50)
             let br = map(n, .2, .8, 50, 100)
             let col = color(hu, sa, br)
 
-            let sw = map(n, .2, .8, 1, 5)
+            let sw = map(n, .2, .8, 2, 4)
             strokeWeight(sw)
 
             stroke(col)
-            point(x + offX, y + offY)
+            point(x, y)
         }
     }
 }
 
+function saveFile(){
+    saveCanvas("tapestry" + Date.now() + ".png")
+    alert("saved")
+    init()
+}
+
 function keyPressed(){
     if (key == " ") init()
+    if (key == "s") saveFile()
 }
 
