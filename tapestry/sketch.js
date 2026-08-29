@@ -7,17 +7,28 @@ function setup() {
     w = width / DIM
 
     background(220)
-    for (let j = 0; j < DIM * 2; j++) {
+    for (let j = 0; j < DIM; j++) {
+        let row = []
         for (let i = 0; i < DIM; i++) {
-            const x = j % 2 == 0 ? w * i : (w * i) + w / 2
-            const y = (w * j) / 2
+            const x = w * i
+            const y = w * j
 
-            strokeWeight(5)
-            point(x, y)
+
+            row.push({ x: x, y: y })
+            row.push({ x: x+w/2, y: y+w/2 })
         }
+        coords.push(row)
     }
 }
 
-// function draw() {
-//     background(220);
-// }
+function draw() {
+    background(220);
+
+    for (let i = 0; i < coords.length; i++) {
+        for (let j = 0; j < coords[i].length; j++) {
+            point(coords[i][j].x, coords[i][j].y)
+        }
+    }
+
+    noLoop()
+}
