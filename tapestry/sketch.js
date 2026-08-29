@@ -1,17 +1,22 @@
-const DIM = 50
+const DIM = 100
 let w
 let coords = []
 let z = 0
 
 let xom, yom
 
+function init(){
+    xom = random(10, 15)
+    yom = random(10, 15)
+    noiseSeed(random(100))
+}
+
 function setup() {
-    createCanvas(500, 500);
+    createCanvas(windowWidth,windowWidth);
     colorMode(HSB)
     w = width / DIM
 
-    xom = random(1, 10)
-    yom = random(1, 10)
+    init()
 
     for (let j = 0; j < DIM; j++) {
         let row = []
@@ -27,27 +32,35 @@ function setup() {
         coords.push(row)
         coords.push(isoRow)
     }
-
-    strokeWeight(4)
 }
 
 function draw() {
-    background(90, 50, 20);
+    background(0, 0, 0);
 
     for (let i = 0; i < coords.length; i++) {
         for (let j = 0; j < coords[i].length; j++) {
             let { x, y } = coords[i][j]
-            let n = noise(x / 70, y / 70, z)
+
+            const div = 200
+            let n = noise(x / div, y / div, z)
             let offX = map(n, 0, 1, -w * xom, w * xom)
             let offY = map(n, 0, 1, -w * yom, w * yom)
 
-            let hu = map(n, .2, .8, 20, 150)
+            let hu = map(n, .2, .8, 180, 360)
             let sa = map(n, .2, .8, 75, 50)
             let br = map(n, .2, .8, 50, 100)
             let col = color(hu, sa, br)
+
+            let sw = map(n, .2, .8, 1, 5)
+            strokeWeight(sw)
 
             stroke(col)
             point(x + offX, y + offY)
         }
     }
 }
+
+function keyPressed(){
+    if (key == " ") init()
+}
+
