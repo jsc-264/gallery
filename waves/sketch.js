@@ -1,7 +1,7 @@
 let scl = 40
 let time, off
-let quant = 1.5
-let rows = 3
+let quant = 5
+let rows = 5
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
