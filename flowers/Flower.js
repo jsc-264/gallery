@@ -9,12 +9,21 @@ class Flower {
         circle(this.x, this.y, this.r * 2)
     }
 
-    grow() {
-        if (this.x >= width - this.r) return
-        if (this.x <= this.r) return
-        if (this.y >= height - this.r) return
-        if (this.y <= this.r) return
+    onEdges() {
+        if (this.x >= width - this.r) return true
+        if (this.x <= this.r) return true
+        if (this.y >= height - this.r) return true
+        if (this.y <= this.r) return true
 
+        return false
+    }
+
+    grow() {
         this.r++
+    }
+
+    touching(other) {
+        let d = dist(this.x, this.y, other.x, other.y)
+        return d < this.r + other.r
     }
 }

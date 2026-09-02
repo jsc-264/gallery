@@ -26,7 +26,17 @@ function setup() {
 function draw() {
     background(220);
     for (let flower of meadow){
-        flower.grow()
         flower.show()
+
+        let touchingOther = false
+        for (let other of meadow){
+            if (flower == other) break
+
+            touchingOther = flower.touching(other)
+        }
+
+        if (!touchingOther && !flower.onEdges()){
+            flower.grow()
+        }
     }
 }
