@@ -21,4 +21,24 @@ class Flower {
     grow() {
         this.r++
     }
+
+    reset(meadow){
+        let x = random(width)
+        let y = random(height)
+
+        let isValidFlower = true
+        for (let flower of meadow) {
+            let d = dist(x, y, flower.x, flower.y)
+            if (d < flower.r) {
+                isValidFlower = false
+                break
+            }
+        }
+
+        if (isValidFlower) {
+            this.x = x
+            this.y = y
+            this.r = 0
+        }
+    }
 }

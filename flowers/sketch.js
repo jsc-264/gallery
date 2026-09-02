@@ -35,13 +35,15 @@ function draw() {
             }
 
             let d = dist(flower.x, flower.y, other.x, other.y)
-            if (d < flower.r + other.r){
+            if (d < flower.r + other.r - 50 || flower.onEdges()){
                 valid = false
             }
         }
 
         if (valid){
             flower.grow()
+        } else {
+            flower.reset(meadow)
         }
     }
 }
