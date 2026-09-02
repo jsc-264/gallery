@@ -1,5 +1,5 @@
 let meadow = []
-let numFlowers = 10
+let numFlowers = 5
 
 function setup() {
     createCanvas(500, 500);
