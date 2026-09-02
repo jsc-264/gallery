@@ -1,8 +1,12 @@
 let meadow = []
 let numFlowers = 5
 
+let palette
+
 function setup() {
     createCanvas(500, 500);
+    colorMode(HSL)
+
     while (meadow.length < numFlowers) {
         let x = random(width)
         let y = random(height)
@@ -24,7 +28,7 @@ function setup() {
 }
 
 function draw() {
-    background(220);
+    background(111, 50, 80);
     for (let flower of meadow) {
         flower.show()
 

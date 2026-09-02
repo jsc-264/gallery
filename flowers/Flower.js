@@ -3,6 +3,10 @@ class Flower {
         this.x = x
         this.y = y
         this.r = r
+
+        const hu = random(360)
+        this.petalCol = color(hu, 100, 90)
+        this.centreCol = color(hu, 30, 50)
     }
 
     show() {
@@ -11,8 +15,10 @@ class Flower {
             const petalX = this.x + cos(TWO_PI / petals * i) * (this.r * 1.1)
             const petalY = this.y + sin(TWO_PI / petals * i) * (this.r * 1.1)
             const petalR = this.r*map(petals, 4, 10, 2, 0.7)
+            fill(this.petalCol)
             circle(petalX, petalY, petalR)
         }
+        fill(this.centreCol)
         circle(this.x, this.y, this.r * 2)
     }
 
