@@ -7,5 +7,6 @@ function setup() {
 
 function draw() {
     background(220);
-    f.render()
+    f.show()
+    f.grow()
 }

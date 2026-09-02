@@ -5,7 +5,16 @@ class Flower {
         this.r = r
     }
 
-    render() {
+    show() {
         circle(this.x, this.y, this.r * 2)
+    }
+
+    grow() {
+        if (this.x >= width - this.r) return
+        if (this.x <= this.r) return
+        if (this.y >= height - this.r) return
+        if (this.y <= this.r) return
+
+        this.r++
     }
 }
