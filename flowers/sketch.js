@@ -1,12 +1,32 @@
-let f
+let meadow = []
+let numFlowers = 10
 
 function setup() {
     createCanvas(500, 500);
-    f = new Flower(100, 100, 50)
+    while (meadow.length < numFlowers){
+        let x = random(width)
+        let y = random(height)
+        let r = random(10, 50)
+
+        let isValidFlower = true
+        for (let flower of meadow){
+            let d = dist(x, y, flower.x, flower.y)
+            if (d < r + flower.r){
+                isValidFlower = false
+                break
+            }
+        }
+
+        if (isValidFlower){
+            meadow.push(new Flower(x, y, r))
+        }
+    }
 }
 
 function draw() {
     background(220);
-    f.show()
-    f.grow()
+    for (let flower of meadow){
+        flower.grow()
+        flower.show()
+    }
 }
