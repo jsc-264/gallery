@@ -21,9 +21,4 @@ class Flower {
     grow() {
         this.r++
     }
-
-    touching(other) {
-        let d = dist(this.x, this.y, other.x, other.y)
-        return d < this.r + other.r
-    }
 }
