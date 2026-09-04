@@ -4,7 +4,7 @@ let numFlowers = 5
 let palette
 
 function setup() {
-    createCanvas(500, 500);
+    createCanvas(windowWidth, windowHeight);
     colorMode(HSL)
 
     while (meadow.length < numFlowers) {
