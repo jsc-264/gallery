@@ -1,7 +1,13 @@
 function setup() {
-    createCanvas(800, 600);
+    let dim = min(windowWidth, windowHeight)
+    createCanvas(dim, dim);
 }
 
 function draw() {
     background(220);
+}
+
+function windowResized(){
+    let dim = min(windowWidth, windowHeight)
+    resizeCanvas(dim, dim);
 }
