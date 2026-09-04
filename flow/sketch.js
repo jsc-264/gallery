@@ -2,6 +2,8 @@ const NOISE_DIM = 20
 let vectorField
 let w
 
+let p
+
 function makeVectorField() {
     let field = []
     for (let j = 0; j < NOISE_DIM; j++) {
@@ -27,24 +29,12 @@ function setup() {
     createCanvas(dim, dim);
     w = width / NOISE_DIM
     vectorField = makeVectorField()
+    p = new Particle(width/2, height/2, 40)
 }
 
 function draw() {
     background(220);
-    for (let j = 0; j < vectorField.length; j++) {
-        for (let i = 0; i < vectorField[j].length; i++) {
-            const x = w * i
-            const y = w * j
-            let vec = vectorField[i][j]
-            push()
-            translate(x, y)
-            rotate(vec.heading())
-            line(0, 0, w, 0)
-            pop()
-        }
-    }
-
-    noLoop()
+    p.render()
 }
 
 function windowResized() {
