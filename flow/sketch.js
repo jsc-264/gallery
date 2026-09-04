@@ -1,16 +1,19 @@
-const NOISE_DIM = 100
-let noiseField
+const NOISE_DIM = 20
+let vectorField
+let w
 
-function makeNoiseField() {
+function makeVectorField() {
     let field = []
     for (let j = 0; j < NOISE_DIM; j++) {
         let row = []
         for (let i = 0; i < NOISE_DIM; i++) {
-            const w = width / NOISE_DIM
             const x = w * i
             const y = w * j
-            let n = noise(x / 100, y / 100)
-            row.push(n)
+            const div = 4000
+            let n = noise(x / div, y / div)
+            let angle = map(n, 0, 1, 0, 180)
+            let vec = p5.Vector.fromAngle(angle)
+            row.push(vec)
         }
 
         field.push(row)
@@ -22,21 +25,22 @@ function makeNoiseField() {
 function setup() {
     let dim = min(windowWidth, windowHeight)
     createCanvas(dim, dim);
-    noiseField = makeNoiseField()
+    w = width / NOISE_DIM
+    vectorField = makeVectorField()
 }
 
 function draw() {
     background(220);
-
-    for (let j = 0; j < noiseField.length; j++) {
-        for (let i = 0; i < noiseField[0].length; i++) {
-            const w = width / NOISE_DIM
+    for (let j = 0; j < vectorField.length; j++) {
+        for (let i = 0; i < vectorField[j].length; i++) {
             const x = w * i
             const y = w * j
-            const n = noiseField[i][j]
-            const col = n * 255
-            fill(col)
-            rect(x, y, w)
+            let vec = vectorField[i][j]
+            push()
+            translate(x, y)
+            rotate(vec.heading())
+            line(0, 0, w, 0)
+            pop()
         }
     }
 
