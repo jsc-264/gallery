@@ -7,20 +7,30 @@ class Particle {
     }
 
     render() {
-        circle(this.pos.x, this.pos.y, this.r)
+        circle(this.pos.x, this.pos.y, this.r * 2)
     }
 
     update() {
         this.pos.add(this.vel)
-        this.pos.x = constrain(this.pos.x, 0, width)
-        this.pos.y = constrain(this.pos.y, 0, height)
+
+        if (this.pos.x < 0) this.pos.x = width
+        if (this.pos.x > width) this.pos.x = 0
+        if (this.pos.y < 0) this.pos.y = height
+        if (this.pos.y > height) this.pos.y = 0
     }
 
     setVel(field) {
-        const row = floor(this.pos.x / FIELD_DIM)
-        const col = floor(this.pos.y / FIELD_DIM)
-
-        this.vel = field[row][col]
+        const i = floor((this.pos.x / w) % FIELD_DIM)
+        const j = floor((this.pos.y / w) % FIELD_DIM)
+        let angle
+        try {
+            angle = field[i][j]
+        } catch {
+            print(i, j)
+            noLoop()
+        }
+        const vec = p5.Vector.fromAngle(angle)
+        this.vel.add(vec).setMag(5)
     }
 
 }

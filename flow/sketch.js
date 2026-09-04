@@ -1,21 +1,20 @@
 const FIELD_DIM = 20
-let vectorField
+let angleField
 let w
 
 let p
 
-function makeVectorField() {
+function makeAngleField() {
     let field = []
     for (let j = 0; j < FIELD_DIM; j++) {
         let row = []
         for (let i = 0; i < FIELD_DIM; i++) {
             const x = w * j
             const y = w * i
-            const div = 4000
+            const div = 200
             let n = noise(x / div, y / div)
-            let angle = map(n, 0, 1, 0, 160)
-            let vec = p5.Vector.fromAngle(angle)
-            row.push(vec)
+            let angle = map(n, 0, 1, 0, 180)
+            row.push(angle)
         }
 
         field.push(row)
@@ -27,29 +26,32 @@ function makeVectorField() {
 function setup() {
     let dim = min(windowWidth, windowHeight)
     createCanvas(dim, dim);
+    angleMode(DEGREES)
     w = width / FIELD_DIM
-    vectorField = makeVectorField()
-    p = new Particle(width / 2, height / 2, 40)
+    angleField = makeAngleField()
+    p = new Particle(100, 100, 10)
 }
 
 function draw() {
     background(220);
-    p.setVel(vectorField)
-    p.update()
-    p.render()
-
-    for (let j = 0; j < vectorField.length; j++) {
-        for (let i = 0; i < vectorField[0].length; i++) {
+    for (let i = 0; i < angleField.length; i++) {
+        for (let j = 0; j < angleField[0].length; j++) {
             const x = w * i
             const y = w * j
-            let vec = vectorField[i][j]
+            let angle = floor(angleField[i][j])
+            // rect(x, y, w)
+
             push()
-            translate(x, y)
-            rotate(vec.heading())
+            translate(x+w/2, y+w/2)
+            rotate(angle)
             line(0, 0, 10, 0)
             pop()
         }
     }
+
+    p.render()
+    p.setVel(angleField)
+    p.update()
 }
 
 function windowResized() {
