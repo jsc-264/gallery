@@ -22,15 +22,9 @@ class Particle {
     setVel(field) {
         const i = floor((this.pos.x / w) % FIELD_DIM)
         const j = floor((this.pos.y / w) % FIELD_DIM)
-        let angle
-        try {
-            angle = field[i][j]
-        } catch {
-            print(i, j)
-            noLoop()
-        }
-        const vec = p5.Vector.fromAngle(angle)
-        this.vel.add(vec).setMag(5)
+        const angle = field[i][j]
+        const vec = p5.Vector.fromAngle(angle).setMag(1)
+        this.vel.add(vec).setMag(2)
     }
 
 }

@@ -2,7 +2,8 @@ const FIELD_DIM = 20
 let angleField
 let w
 
-let p
+let particles = []
+let numParticles = 1
 
 function makeAngleField() {
     let field = []
@@ -29,7 +30,9 @@ function setup() {
     angleMode(DEGREES)
     w = width / FIELD_DIM
     angleField = makeAngleField()
-    p = new Particle(100, 100, 10)
+    for (let i = 0; i < numParticles; i++) {
+        particles.push(new Particle(random(width), random(height), 20))
+    }
 }
 
 function draw() {
@@ -42,16 +45,18 @@ function draw() {
             // rect(x, y, w)
 
             push()
-            translate(x+w/2, y+w/2)
+            translate(x + w / 2, y + w / 2)
             rotate(angle)
             line(0, 0, 10, 0)
             pop()
         }
     }
 
-    p.render()
-    p.setVel(angleField)
-    p.update()
+    for (let p of particles) {
+        p.render()
+        p.setVel(angleField)
+        p.update()
+    }
 }
 
 function windowResized() {
