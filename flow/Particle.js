@@ -1,7 +1,7 @@
 class Particle {
     constructor(x, y, r) {
         this.pos = createVector(x, y)
-        this.vel = createVector(0, 1)
+        this.vel = createVector(0, 0)
         this.acc = createVector(0, 0)
         this.r = r
     }
@@ -22,7 +22,15 @@ class Particle {
 
     }
 
-    force(vec){
+    apply(vec){
         this.acc.add(vec)
+    }
+
+    follow(field){
+        const x = floor(this.pos.x / res)
+        const y = floor(this.pos.y / res)
+        const index = x + y * DIM
+        const force = field[index]
+        this.apply(force)
     }
 }

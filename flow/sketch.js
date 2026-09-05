@@ -1,6 +1,7 @@
 const DIM = 50
 let res
 
+let field
 
 const NUM_PARTICLES = 10
 let particles = []
@@ -9,6 +10,7 @@ function setup() {
     let minDim = min(windowWidth, windowHeight)
     createCanvas(minDim, minDim);
     res = width / DIM
+    field = new Array(DIM*DIM)
 
     for (let i = 0; i < NUM_PARTICLES; i++) {
         particles.push(new Particle(100, 100, 10))
@@ -23,6 +25,8 @@ function draw() {
             const n = noise(x/10, y/10)
             const angle = n * TWO_PI
             const vec = p5.Vector.fromAngle(angle)
+            const index = x + y * DIM
+            field[index] = vec
             push()
             translate(x*res, y*res)
             rotate(vec.heading())
@@ -33,6 +37,7 @@ function draw() {
 
     for (let p of particles){
         p.update()
+        p.follow(field)
         p.render()
     }
 }
