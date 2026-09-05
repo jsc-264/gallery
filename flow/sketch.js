@@ -3,15 +3,17 @@ let res
 
 let field
 
-const NUM_PARTICLES = 500
+const NUM_PARTICLES = 3000
 let particles = []
 
-function makeField(){
-    let field = new Array(DIM*DIM)
+let z = 0
+
+function makeField(z) {
+    let field = new Array(DIM * DIM)
     for (let y = 0; y < DIM; y++) {
         for (let x = 0; x < DIM; x++) {
-            const n = noise(x / 10, y / 10)
-            const angle = n * TWO_PI
+            const n = noise(x / 10, y / 10, z)
+            const angle = map(n, 0, 1, 0, TWO_PI/2)
             const vec = p5.Vector.fromAngle(angle)
             const index = x + y * DIM
             field[index] = vec
@@ -23,19 +25,20 @@ function makeField(){
 
 function setup() {
     let minDim = min(windowWidth, windowHeight)
-    createCanvas(minDim, minDim);
+    createCanvas(minDim, minDim, P2D);
     res = width / DIM
-    field = makeField()
-
     for (let i = 0; i < NUM_PARTICLES; i++) {
-        particles.push(new Particle(random(width), random(height), 1))
+        particles.push(new Particle(random(width), random(height), 2))
     }
 }
 
 function draw() {
     background(220);
 
-    for (let p of particles){
+    field = makeField(z)
+    z+=0.01
+
+    for (let p of particles) {
         p.update()
         p.follow(field)
         p.render()
