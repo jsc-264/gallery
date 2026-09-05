@@ -26,6 +26,7 @@ function makeField(z) {
 function setup() {
     let minDim = min(windowWidth, windowHeight)
     createCanvas(minDim, minDim, P2D);
+    colorMode(HSL)
     res = width / DIM
     for (let i = 0; i < NUM_PARTICLES; i++) {
         particles.push(new Particle(random(width), random(height), 2))
@@ -33,7 +34,7 @@ function setup() {
 }
 
 function draw() {
-    background(200);
+    background(0, 0, 5);
 
     field = makeField(z)
     z+=0.01
@@ -43,6 +44,10 @@ function draw() {
         p.follow(field)
         p.render()
     }
+
+    particles.push(new Particle(random(width), random(height), 2))
+    particles = particles.slice(1)
+    // noLoop()
 }
 
 function windowResized() {

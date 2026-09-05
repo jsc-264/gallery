@@ -3,11 +3,15 @@ class Particle {
         this.pos = createVector(x, y)
         this.vel = createVector(0, 0)
         this.acc = createVector(0, 0)
-        this.maxSpeed = 3
+        this.maxSpeed = 7
         this.r = r
+
+        let t = map(this.pos.x * this.pos.y, 0, width * height, 0, 1)
+        this.col = lerpColor(color(200, 100, 50), color(320, 100, 80), t)
     }
 
     render() {
+        stroke(this.col)
         strokeWeight(this.r)
         point(this.pos.x, this.pos.y)
     }
