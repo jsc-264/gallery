@@ -3,7 +3,7 @@ let res
 
 let field
 
-const NUM_PARTICLES = 3000
+const NUM_PARTICLES = 2000
 let particles = []
 
 let z = 0
@@ -13,7 +13,7 @@ function makeField(z) {
     for (let y = 0; y < DIM; y++) {
         for (let x = 0; x < DIM; x++) {
             const n = noise(x / 10, y / 10, z)
-            const angle = map(n, 0, 1, 0, TWO_PI/2)
+            const angle = map(n, 0, 1, 0, TWO_PI-0.1)
             const vec = p5.Vector.fromAngle(angle)
             const index = x + y * DIM
             field[index] = vec
@@ -33,7 +33,7 @@ function setup() {
 }
 
 function draw() {
-    background(220);
+    background(200);
 
     field = makeField(z)
     z+=0.01
