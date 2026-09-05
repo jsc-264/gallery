@@ -3,6 +3,7 @@ class Particle {
         this.pos = createVector(x, y)
         this.vel = createVector(0, 0)
         this.acc = createVector(0, 0)
+        this.maxSpeed = 3
         this.r = r
     }
 
@@ -12,13 +13,14 @@ class Particle {
 
     update() {
         this.vel.add(this.acc)
+        this.vel.limit(this.maxSpeed)
         this.pos.add(this.vel)
         this.acc.mult(0)
 
-        if (this.pos.x > width) this.pos.x = 0
-        if (this.pos.x < 0) this.pos.x = width
-        if (this.pos.y > height) this.pos.y = 0
-        if (this.pos.y < 0) this.pos.y = height
+        if (this.pos.x > width + this.r) this.pos.x = -this.r
+        if (this.pos.x < -this.r) this.pos.x = width + this.r
+        if (this.pos.y > height + this.r) this.pos.y = -this.r
+        if (this.pos.y < -this.r) this.pos.y = height + this.r
 
     }
 
