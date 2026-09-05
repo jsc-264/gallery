@@ -1,10 +1,18 @@
 const DIM = 50
 let res
 
+
+const NUM_PARTICLES = 10
+let particles = []
+
 function setup() {
     let minDim = min(windowWidth, windowHeight)
     createCanvas(minDim, minDim);
     res = width / DIM
+
+    for (let i = 0; i < NUM_PARTICLES; i++) {
+        particles.push(new Particle(100, 100, 10))
+    }
 }
 
 function draw() {
@@ -21,6 +29,11 @@ function draw() {
             line(0, 0, res, 0)
             pop()
         }
+    }
+
+    for (let p of particles){
+        p.update()
+        p.render()
     }
 }
 
