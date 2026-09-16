@@ -37,7 +37,7 @@ function draw() {
     background(0, 0, 5);
 
     field = makeField(z)
-    z+=0.01
+    z+=0.02
 
     for (let p of particles) {
         p.update()
