@@ -22,7 +22,7 @@ function draw() {
         points.push(currP)
 
         const x = rad * cos(theta)
-        const y = rad * sin(theta)s
+        const y = rad * sin(theta)
 
         currP = createVector(x, y)
 
