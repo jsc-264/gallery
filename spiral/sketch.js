@@ -9,7 +9,11 @@ async function setup() {
     img = await loadImage("./assets/parrot.jpg")
     img.resize(100, 100)
     noSmooth()
-    currP = createVector(0, 0)
+    currP = {
+        x: 0,
+        y: 0,
+        s: 0
+    }
 }
 
 function draw() {
@@ -17,30 +21,37 @@ function draw() {
     // image(img, 0, 0, width, height)
 
     push()
-    translate(width / 2, height / 2)
-    for (let i = 0; i < 2; i++) {
+    translate(0, 0)
+    for (let _ = 0; _ < 2; _++) {
         points.push(currP)
 
         const x = rad * cos(theta)
         const y = rad * sin(theta)
 
-        currP = createVector(x, y)
+        const pix = img.get(x, y)
+        const bright = brightness(pix)
+        const s = map(bright, 0, 100, 0.1, 5)
+        print(bright)
+
+        currP = {
+            x: x,
+            y: y,
+            s: s
+        }
 
         noFill()
-        beginShape()
-        for (let p of points) {
-            vertex(p.x, p.y)
+        for (let i = 0; i < points.length-1; i++) {
+            strokeWeight(points[i].s)
+            line(points[i].x, points[i].y, points[i+1].x, points[i+1].y,)
         }
-        endShape()
 
-        theta += .1
-        rad += .1
+        theta += .2
+        rad += .2
     }
 
     const end = points[points.length - 1]
     const d = dist(end.x, end.y, 0, 0)
-    if (d > width/2) noLoop()
+    if (d > width) noLoop()
 
     pop()
-    print("run")
 }
