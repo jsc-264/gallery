@@ -1,16 +1,20 @@
+function r10(){
+    return random([1, 0])
+}
+
 class Cell {
     constructor(x, y, w, h) {
         this.dots = [
-            [1, 0],
-            [0, 1],
-            [1, 0]
+            [r10(), r10()],
+            [r10(), r10()],
+            [r10(), r10()]
         ]
+
 
         this.x = x
         this.y = y
         this.w = w
         this.h = h
-        this.res = gcd(w, h)
     }
 
     render() {
@@ -20,9 +24,9 @@ class Cell {
         for (let j = 0; j < this.dots.length; j++) {
             for (let i = 0; i < this.dots[j].length; i++) {
                 if (this.dots[j][i] == 1) {
-                    const x = this.res * i
-                    const y = this.res * j
-                    circle(x, y, this.res / 1.5)
+                    const x = this.w / this.dots[j].length * i
+                    const y = this.h / this.dots.length * j
+                    circle(x, y, 8)
                 }
             }
         }
