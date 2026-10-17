@@ -3,7 +3,7 @@ let w
 let para = []
 
 function setup() {
-    createCanvas(windowWidth * .9, windowWidth * .9);
+    createCanvas(min(windowWidth, windowHeight) * .9, min(windowWidth, windowHeight) * .9);
     w = width / DIM
 
     for (let j = 0; j < DIM; j++) {
