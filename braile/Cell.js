@@ -26,10 +26,16 @@ class Cell {
                 if (this.dots[j][i] == 1) {
                     const x = this.w / this.dots[j].length * i
                     const y = this.h / this.dots.length * j
-                    circle(x, y, 8)
+                    circle(x, y, w/6)
                 }
             }
         }
         pop()
+    }
+
+    update(){
+        let row = floor(random(this.dots.length))
+        let col = floor(random(this.dots[0].length))
+        this.dots[row][col] = r10()
     }
 }

@@ -1,4 +1,4 @@
-const DIM = 10
+const DIM = 20
 let w
 let para = []
 
@@ -13,12 +13,17 @@ function setup() {
             para.push(new Cell(x, y, w, w))
         }
     }
+    noStroke()
+    fill(30, 200, 100)
 }
 
 function draw() {
-    background(220);
+    background(50);
     for (let cell of para) {
         cell.render()
+        if (random() < .01) {
+            cell.update()
+        }
     }
 
 }
