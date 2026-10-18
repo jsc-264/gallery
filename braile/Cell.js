@@ -15,6 +15,8 @@ class Cell {
         this.y = y
         this.w = w
         this.h = h
+
+        this.col = color(random(90, 270), 50, 50)
     }
 
     render() {
@@ -26,6 +28,7 @@ class Cell {
                 if (this.dots[j][i] == 1) {
                     const x = this.w / this.dots[j].length * i
                     const y = this.h / this.dots.length * j
+                    fill(this.col)
                     circle(x, y, w/6)
                 }
             }

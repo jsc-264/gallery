@@ -4,6 +4,7 @@ let para = []
 
 function setup() {
     createCanvas(min(windowWidth, windowHeight) * .9, min(windowWidth, windowHeight) * .9);
+    colorMode(HSL)
     w = width / DIM
 
     for (let j = 0; j < DIM; j++) {
@@ -14,11 +15,10 @@ function setup() {
         }
     }
     noStroke()
-    fill(30, 200, 100)
 }
 
 function draw() {
-    background(50);
+    background(20);
     for (let cell of para) {
         cell.render()
         if (random() < .01) {
