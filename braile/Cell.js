@@ -16,7 +16,7 @@ class Cell {
         this.w = w
         this.h = h
 
-        this.col = color(random(90, 270), 50, 50)
+        this.col = color(random(90, 270), random(50, 80), random(50, 70))
     }
 
     render() {

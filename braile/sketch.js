@@ -18,7 +18,7 @@ function setup() {
 }
 
 function draw() {
-    background(20);
+    background(10);
     for (let cell of para) {
         cell.render()
         if (random() < .01) {
