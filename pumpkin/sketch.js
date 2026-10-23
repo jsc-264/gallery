@@ -1,5 +1,7 @@
 const DIM = 10
 let w
+let patch = []
+let firstPass = true
 
 function mouth(x, y, w, h, res){
     let mouthPoints = []
@@ -39,37 +41,60 @@ function eye(x, y, r, points = random(5, 20)){
     pop()
 }
 
-function pumpkin(x, y, w, res = 10) {
-    const eyeR = 5
-    const mouthW = w / 2 + eyeR * 2
-    push()
-    translate(x, y)
-    fill("orange")
-    rect(0, 0, w)
-
-    // fill(0)
-    // left eye
-    eye(w / 4, 1.3 * w / 4, eyeR)
-    // right eye
-    eye(3 * w / 4, 1.3 * w / 4, eyeR)
-    // mouth
-    mouth(w / 4 - eyeR, 2.5 * w / 4, mouthW, eyeR, res)
-    pop()
-}
-
 function setup() {
     createCanvas(600, 600);
-    w = width / DIM
+    colorMode(HSL)
+    this.w = this.width / DIM
+
+    for (let j = 0; j < DIM; j++) {
+        for (let i = 0; i < DIM; i++) {
+            const x = this.w * i
+            const y = this.w * j
+            patch.push(new Pumpkin(x, y, this.w))
+        }
+    }
+    background(220);
 }
 
 function draw() {
-    background(220);
-    for (let j = 0; j < DIM; j++) {
-        for (let i = 0; i < DIM; i++) {
-            const x = w * i
-            const y = w * j
-            pumpkin(x, y, w)
+    for (let p of patch){
+        if (firstPass){
+            p.render()
+        } else {
+            if (random() < .005){
+                p.render()
+            }
         }
     }
-    noLoop()
+    if (firstPass){
+        firstPass = false
+    }
+    // noLoop()
+}
+
+class Pumpkin{
+    constructor(x, y, w){
+        this.x = x
+        this.y = y
+        this.w = w
+    }
+
+    render(res = 10){
+        const eyeR = 5
+        const mouthW = this.w / 2 + eyeR * 2
+        push()
+        translate(this.x, this.y)
+        fill(random(10, 40), random(40, 60), random(40, 60))
+        rect(0, 0, this.w)
+        fill(0)
+
+        // fill(0)
+        // left eye
+        eye(this.w / 4, 1.3 * this.w / 4, eyeR)
+        // right eye
+        eye(3 * this.w / 4, 1.3 * this.w / 4, eyeR)
+        // mouth
+        mouth(this.w / 4 - eyeR, 2.5 * this.w / 4, mouthW, eyeR, res)
+        pop()
+    }
 }
