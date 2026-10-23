@@ -69,7 +69,6 @@ function draw() {
     if (firstPass){
         firstPass = false
     }
-    // noLoop()
 }
 
 class Pumpkin{
