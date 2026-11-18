@@ -2,17 +2,23 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    ofBackground(0, 0, 0);
+    camWidth = 640;
+    camHeight = 480;
 
+    vidGrabber.setVerbose(true);
+
+    vidGrabber.setup(camWidth, camHeight);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    vidGrabber.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+    vidGrabber.draw(0, 0);
 }
 
 //--------------------------------------------------------------
