@@ -14,11 +14,23 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     vidGrabber.update();
+    frameData = vidGrabber.getPixels();
+
+    ofColor pixCol;
+    for (int y = 0; y < frameData.getHeight(); y++){
+        for (int x = 0; x < frameData.getWidth(); x++){
+            pixCol = frameData.getColor(x, y);
+            frameData.setColor(x, y, pixCol);
+        }
+    }
+
+    frame.loadData(frameData);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     vidGrabber.draw(0, 0);
+    frame.draw(camWidth, 0, camWidth, camHeight);
 }
 
 //--------------------------------------------------------------

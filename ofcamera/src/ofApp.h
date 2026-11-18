@@ -27,4 +27,7 @@ class ofApp : public ofBaseApp{
 
 		int camWidth;
 		int camHeight;
+
+		ofPixels frameData;
+		ofTexture frame;
 };
