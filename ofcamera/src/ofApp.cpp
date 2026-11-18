@@ -20,6 +20,16 @@ void ofApp::update(){
     for (int y = 0; y < frameData.getHeight(); y++){
         for (int x = 0; x < frameData.getWidth(); x++){
             pixCol = frameData.getColor(x, y);
+
+            if (pixCol.r > 200){
+                pixCol.set(255);
+            } else {
+                if (ofRandom(1) < 0.2){
+                    pixCol.set(ofRandom(255), ofRandom(255), ofRandom(255));
+
+                }
+            }
+
             frameData.setColor(x, y, pixCol);
         }
     }
