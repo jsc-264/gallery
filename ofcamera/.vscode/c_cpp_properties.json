@@ -26,7 +26,9 @@
 				"${OF_LIBS_INCLUDE}",
 				"${workspaceFolder}/src/**",
 				"${PROJECT_ADDON_INCLUDES}",
-				"${PROJECT_EXTRA_INCLUDES}"
+				"${PROJECT_EXTRA_INCLUDES}",
+				"C:/Users/joest/of_download/of_vscode/libs/**",
+				"C:/Users/joest/of_download/of_vscode/addons/**"
 			],
 			"intelliSenseMode": "${default}",
 			"macFrameworkPath": [
@@ -74,7 +76,9 @@
 				"${workspaceRoot}",
 				"${workspaceFolder}/src/**",
 				"${PROJECT_ADDON_INCLUDES}",
-				"${PROJECT_EXTRA_INCLUDES}"
+				"${PROJECT_EXTRA_INCLUDES}",
+				"C:/Users/joest/of_download/of_vscode/libs/**",
+				"C:/Users/joest/of_download/of_vscode/addons/**"
 			],
 			"intelliSenseMode": "${default}",
 			"mergeConfigurations": true,
