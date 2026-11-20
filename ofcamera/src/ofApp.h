@@ -30,4 +30,7 @@ class ofApp : public ofBaseApp{
 
 		ofPixels frameData;
 		ofTexture frame;
+
+		int highThreshold;
+		int lowThreshold;
 };
